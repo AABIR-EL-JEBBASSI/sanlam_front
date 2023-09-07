@@ -1,0 +1,40 @@
+/* Recapitulatif.css */
+.recapitulatif-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .recapitulatif-info,
+  .recapitulatif-voiture,
+  .recapitulatif-images,
+  .recapitulatif-signature {
+    margin-bottom: 20px;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  .recapitulatif-buttons {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 5px;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

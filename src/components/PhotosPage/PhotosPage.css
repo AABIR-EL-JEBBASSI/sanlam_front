@@ -1,0 +1,104 @@
+.photo-page {
+    text-align: center;
+    padding: 200px;
+  }
+  
+  h2 {
+    font-size: 30px;
+    color: #007bff;
+  }
+  
+  p {
+    font-size: 18px;
+    color: black;
+    
+    
+  }
+  h3 {
+    font-size: 25px;  
+    color: black;
+  }
+  
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #b5d2f1;
+    overflow: hidden;
+  }
+  
+  .image-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: -5px;
+    margin-left: 50px;
+    margin-right: -100px;
+  }
+  
+  img {
+    width: 50%;
+    height: auto;
+    margin-top: 50px;
+  }
+  
+
+  
+ /* PhotoPage.css */
+/* Style des boutons "Précédent" et "Suivant" */
+.button-prev-next {
+  background-color: white;
+  color: #000;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 15px;
+  margin: 5px;
+  margin-top: 20px;
+}
+
+/* Ajoutez de l'espace à gauche pour le deuxième bouton */
+.button-prev-next + .button-prev-next {
+  margin-left: 20px; /* Ajustez la valeur pour l'espacement souhaité */
+}
+
+  
+  
+
+  
+/* Style du bouton "Capturer" */
+.button-capture {
+    background-color: #007bff; /* Bleu */
+    color: #fff; /* Texte blanc */
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-bottom: 30px;
+    margin-right: 100px;
+    margin-top: -10px ;
+    width: 210px;
+    height: auto;
+  }
+  
+  /* Style du bouton "Capturer" lorsque survolé */
+  .button-capture:hover {
+    background-color: blue; /* Bleu plus foncé au survol */
+  }
+  
+  /* Style du bouton "Capturer" lorsque actif (clic) */
+  .button-capture:active {
+    background-color: blue; /* Conserver la couleur au clic */
+  }
+  
+  .camera-container {
+    width: 100%;
+    height: auto;
+  }
+  
+  
+  
+

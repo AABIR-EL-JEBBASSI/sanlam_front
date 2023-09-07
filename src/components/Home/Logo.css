@@ -1,0 +1,12 @@
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* Hauteur de la vue port (viewport) pour centrer verticalement */
+}
+.logo-image {
+  width: 250px; /* Largeur de votre choix */
+  height: auto; /* Laissez la hauteur ajuster proportionnellement */
+}

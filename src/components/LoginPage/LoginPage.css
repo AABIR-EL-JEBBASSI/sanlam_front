@@ -1,0 +1,71 @@
+.admin-login-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 600px;
+}
+
+.sanlam-logo {
+  width: 150px; /* Ajustez la largeur de votre logo */
+  margin-bottom: 20px;
+}
+.admin-login-container h2 {
+  color: black;
+}
+
+.admin-login-form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  color: black; /* Couleur de l'écriture */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: black; /* Couleur de l'écriture */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: blue; /* Couleur de la bordure en cas de focus */
+  box-shadow: 0 0 5px rgba(0, 0, 255, 0.3); /* Ombre en cas de focus */
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: blue; /* Couleur de fond du bouton */
+  color: white; /* Couleur de l'écriture du bouton */
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0066cc; /* Couleur de fond du bouton au survol */
+}
+.auth-title {
+  color: rgb(3, 3, 104) !important; /* Couleur du texte en bleu marine foncé avec !important */
+}

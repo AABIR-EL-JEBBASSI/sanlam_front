@@ -1,0 +1,103 @@
+/* src/components/FormPage/FormPage.css */
+
+.form-page {
+  background-color: #007bff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  background-color: white; /* Bleu clair */
+  border-radius: 8px;
+  padding: 60px;
+  max-width: 1500px;
+  width: 110%;
+  box-shadow: 0 0 10px rgba(134, 129, 204, 0.938);
+  text-align: center;
+}
+.phrase {
+  color: #007bff;
+  margin-top: 20px ;
+  margin-bottom: 60px ;
+}
+
+
+
+
+
+
+button[type="button"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 40px;
+  width: 150px;
+  margin-right: 10px;
+}
+/* Ajoutez de la marge à droite à chaque .form-group */
+
+
+.form-row button[type="button"] {
+  margin-right: 100px; /* Espacement à droite de chaque bouton */
+}
+/* Ajoutez de la marge à droite à chaque .form-group, sauf au dernier */
+.form-row .form-group:not(:last-child) {
+  margin-right: 100px; /* Espacement à droite de chaque case, sauf au dernier */
+}
+
+
+
+button[type="button"]:hover {
+  background-color: #0056b3;
+}
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #007bff;
+  margin-right: 30px;
+}
+
+.form-input {
+  width: 80%;
+  padding: 5px;
+  border: 1px solid white; /* Couleur bleue pour la bordure */
+  border-radius: 15px;
+  font-size: 16px;
+  margin-top: 10px;
+  background-color: #dee2f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  color: black;
+
+}
+
+
+/* Styliser les étiquettes des champs de formulaire */
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #007bff; /* Bleu foncé */
+}
+/* Appliquer un style à un champ de formulaire lorsqu'il est sélectionné (focus) */
+.form-input:focus {
+  border: 1px solid #007bff; /* Bordure bleue lorsqu'il est sélectionné */
+  box-shadow: 0 0 5px #007bff(0, 0, 255, 0.5); /* Ombre bleue lorsqu'il est sélectionné */
+  outline: none; /* Supprime le contour par défaut */
+}
+
+

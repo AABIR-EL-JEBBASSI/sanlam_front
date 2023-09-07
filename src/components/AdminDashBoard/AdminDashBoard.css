@@ -1,0 +1,117 @@
+/* AdminDashboard.css */
+.admin-dashboard { /*phrase tableau de bord*/
+    display: flex;
+    color: red;
+    
+    }
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: rgb(46, 46, 216); /* Couleur bleue */
+    width: 20%; /* 1/5 de la page */
+    padding: 20px;
+    color: white; /* Texte blanc */
+}
+
+.admin-info { /*conteneurs demandes*/
+    margin-bottom: 20px;
+    padding: 0 50px; /* Ajout de marge intérieure pour l'espacement */
+    border-radius: 15;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.menu li.active {
+    font-weight: bold;
+}
+
+/* Content Styles */
+.content {
+    flex: 1;
+    padding: 20px;
+    position: relative; /* Position relative pour l'alignement du logo */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 328px;
+}
+
+/* Barre de recherche en haut de la page */
+.search-bar {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    margin-right: 600px;
+}
+
+
+.search-bar input[type="text"] {
+    margin-right: 20px;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    top: 0px; /* Espacement par rapport au haut de la page */
+    right: 20px; /* Espacement par rapport à la droite de la page */
+    margin-bottom: 40px;
+}
+
+.summary-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-item { /* conteneurs demandes*/
+    background-color: #5e65a3; /* Couleur de fond grise */
+    padding: 20px;
+    flex-basis: 24%;
+    text-align: center;
+    margin-right: 10px; /* Espacement entre les conteneurs */
+    
+}
+
+/* Couleurs différentes pour les conteneurs */
+.demandes-icon {
+    background-color: red; /* Couleur d'icône de demande, à personnaliser */
+}
+
+.en-cours-icon {
+    background-color: green; /* Couleur d'icône de demande en cours, à personnaliser */
+}
+
+.traites-icon {
+    background-color: blue; /* Couleur d'icône de demande traitée, à personnaliser */
+}
+
+.total-icon {
+    background-color: yellow; /* Couleur d'icône de total de demandes, à personnaliser */
+}
+
+.summary-text p {
+    margin: 0;
+    font-weight: bold;
+}
+body{
+    margin: 0;
+}
+/* Ajoutez des styles pour le conteneur de graphiques selon vos besoins */
+.chart-container {
+    /* Styles des graphiques */
+}

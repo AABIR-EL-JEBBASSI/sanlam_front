@@ -1,0 +1,12 @@
+/* homepage.css */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* 100% de la hauteur de la vue */
+  background-color: white; /* Fond blanc pour toute la page */
+}
+
+

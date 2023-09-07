@@ -1,0 +1,188 @@
+.signature-title {
+    color: #007bff;
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .signature-description {
+    color: red;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .signature-form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .form-group {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e2ebf7;
+  }
+  
+  .signature-page {
+    padding: 20px;
+    margin: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+  }
+  
+  .signature-container {
+    border: 1px solid #000;
+    padding: 20px;
+    margin-top: 60px;
+    background-color: #9cc4f3;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+  }
+  
+  .signature-box {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #000;
+    margin-bottom: 10px;
+    background-color: white;
+  }
+  
+  .signature-space {
+    border: 1px solid #ccc;
+    background-color: white;
+    min-height: 150px;
+    margin: 10px 0;
+  }
+  
+  .signature-space p {
+    font-size: 16px;
+  }
+  
+  .signature-buttons {
+    margin-top: 10px;
+  }
+  
+  .signature-buttons button {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 5px;
+    margin-top: 0px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .checkbox {
+    margin-top: 20px;
+  }
+  
+  .checkbox label {
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -25px;
+    margin-left: 10px;
+  }
+  
+  .navigation-buttons {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .navigation-buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 5px;
+    margin-top: 20px;
+  }
+  
+  /* Style des boutons */
+  button {
+    background-color: white;
+    color: #000;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  /* Style des boutons actifs (clic) */
+  button:active,
+  button:focus {
+    background-color: blue;
+    border-color: blue;
+    border: 1px solid #007bff;
+  }
+  
+  /* Style des cases à cocher
+/* Style des cases à cocher */
+input[type="checkbox"] {
+    margin-right: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  /* Style des cases à cocher actives (sélectionnées) */
+  input[type="checkbox"]:active {
+    background-color: blue;
+  }
+  
+  /* Style des cases à cocher lorsqu'elles sont sélectionnées (focus) */
+  input[type="checkbox"]:focus {
+    border-color: blue;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+    outline: none;
+  }
+  
+  /* Style des boutons actifs (clic) */
+  button:active,
+  button:focus {
+    background-color: blue;
+    border-color: blue;
+    border: 1px solid #007bff;
+  }
+  
+  /* Style des cases de nom et de date après sélection */
+  .form-group input:focus {
+    border-color: blue !important;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5) !important;
+  }
+  
+  /* Style des boutons après sélection */
+  .signature-buttons button:focus {
+    border-color: blue !important;
+  }
+    
