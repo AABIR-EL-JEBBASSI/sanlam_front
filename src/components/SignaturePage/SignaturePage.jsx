@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect  } from 'react';
 import './SignaturePage.css';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -46,6 +46,7 @@ const SignaturePage = ({ formData, setFormData, setSignature }) => {
     setSignatureImage(signatureImageURL);
     setSignature(signatureImageURL);
     console.log('Signature sauvegardée:', signatureImageURL);
+    localStorage.setItem('signatureData', JSON.stringify({ signatureImageURL, name, date }));
     setFormData((prevFormData) => ({
       ...prevFormData,
       signature: signatureImageURL,
@@ -57,6 +58,7 @@ const SignaturePage = ({ formData, setFormData, setSignature }) => {
   const showNotificationModal = () => {
     setShowNotification(true);
   };
+  
   
 
   return (

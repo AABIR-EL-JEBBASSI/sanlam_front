@@ -1,3 +1,4 @@
+
 import React , { useState , useRef, useEffect } from 'react';
 import './PhotosPage.css'; 
 import { Link } from 'react-router-dom';
@@ -7,60 +8,40 @@ const PhotoPage = () => {
   const [capturedPhotos, setCapturedPhotos] = useState({});
   const [capturedMessage, setCapturedMessage] = useState('');
   const [isCameraActive, setIsCameraActive] = useState(false);
-  
-  const [activeContainer, setActiveContainer] = useState(null); 
+  const [videoContainer, setVideoContainer] = useState(null);
   const videoRef = useRef(null);
   const streamRef = useRef(null);
-  const VideoContainerRef = useRef(null);
-  const [activeCompteurContainer, setActiveCompteurContainer] = useState(null);
-const [activeFaceAvantContainer, setActiveFaceAvantContainer] = useState(null);
-const videoRefCompteur = useRef(null);
-const videoRefFaceAvant = useRef(null);
-const VideoContainerRefCompteur = useRef(null);
-const VideoContainerRefFaceAvant = useRef(null);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   useEffect(() => {
-    if (videoRef.current && VideoContainerRef.current) {
-      startCamera(); // Vous pouvez maintenant accéder à videoRef.current en toute sécurité
-    }
     return () => {
       stopCamera();
     };
   }, []);
-  
-  const startCameraCompteur = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-  
-      if (videoRefCompteur.current) {
-        videoRefCompteur.current.srcObject = stream;
-        videoRefCompteur.current.play();
-      }
-  
-      console.log(stream);
-      streamRef.current = stream;
-      setIsCameraActive(true);
-  
-      if (VideoContainerRefCompteur.current) {
-        VideoContainerRefCompteur.current.appendChild(videoRefCompteur.current);
-      }
-    } catch (error) {
-      console.error('Erreur lors de l\'accès à la caméra :', error);
-    }
+  const startCamera = () => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then((stream) => {
+        videoRef.current.srcObject = stream;
+        videoRef.current.play();
+        setIsCameraActive(true);
+        streamRef.current = stream;
+        if (videoContainer) {
+          videoContainer.appendChild(videoRef.current);
+        }
+        setIsCameraActive(true); 
+      })
+      .catch((error) => {
+        console.error('Erreur lors de l\'accès à la caméra :', error);
+      });
   };
-  
-  
-  
-  
   const stopCamera = () => {
     if (videoRef.current) {
       const video = videoRef.current;
-      const tracks = video.srcObject.getTracks();
+      const tracks = video.getTracks();
       tracks.forEach((track) => {
         track.stop();
       });
-      window.URL.revokeObjectURL(video.src);
       videoRef.current.srcObject = null;
       setIsCameraActive(false);
     }
@@ -68,95 +49,62 @@ const VideoContainerRefFaceAvant = useRef(null);
 
 
   const capturePhoto = (imageName) => { 
-    let currentVideoRef;
 
-    if (activeCompteurContainer === 'Compteur') {
-      currentVideoRef = videoRefCompteur.current;
-    } else if (activeFaceAvantContainer === 'Face avant') {
-      currentVideoRef = videoRefFaceAvant.current;
-    } else {
-      currentVideoRef = videoRef.current;
-    }
-    if (!currentVideoRef || !isCameraActive) {
+    if (!isCameraActive) {
       console.error('La caméra n\'est pas active.');
       return;
-    }
-  
-    // Créez une fonction pour gérer l'événement play
-    const handlePlay = () => {
-      const canvasElement = document.createElement('canvas');
-      const context = canvasElement.getContext('2d');
-  
-      canvasElement.width = currentVideoRef.videoWidth;
-      canvasElement.height = currentVideoRef.videoHeight;
-      context.drawImage(currentVideoRef.current, 0, 0, canvasElement.width, canvasElement.height);
-  
-      const imageDataURL = canvasElement.toDataURL('image/png');
-  
-      const currentDate = new Date();
-      const formattedDate = currentDate.toISOString();
-  
-      navigator.geolocation.getCurrentPosition((position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        const photoInfo = {
-          date: formattedDate,
-          location: { latitude, longitude },
-        };
-  
-        const updatedCapturedPhotos = { ...capturedPhotos };
-        updatedCapturedPhotos[imageName] = { imageDataURL, ...photoInfo };
-        setCapturedPhotos(updatedCapturedPhotos);
-        setCapturedMessage('Photo sauvegardée');
-  
-        setSelectedPhoto({ imageDataURL, ...photoInfo });
-        
-        // Arrêtez la caméra après avoir capturé la photo
-        stopCamera();
-        
-        // Supprimez l'écouteur d'événements après avoir capturé la photo
-        videoRef.current.removeEventListener('play', handlePlay);
-      });
-    };
-    
-    // Ajoutez l'écouteur d'événements au videoRef.current
-    videoRef.current.addEventListener('play', handlePlay);
-  };
 
- 
-  
+    }
    
+
+    const canvasElement = document.createElement('canvas');
+    const context = canvasElement.getContext('2d');
+    canvasElement.width = videoRef.current.videoWidth;
+    canvasElement.height = videoRef.current.videoHeight;
+    context.drawImage(videoRef.current, 0, 0, canvasElement.width, canvasElement.height);
+
+    const imageDataURL = canvasElement.toDataURL('image/png');
+
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString();
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const photoInfo = {
+        date: formattedDate,
+        location: { latitude, longitude },
+      };
+
+      const updatedCapturedPhotos = { ...capturedPhotos };
+      updatedCapturedPhotos[imageName] = { imageDataURL, ...photoInfo };
+      setCapturedPhotos(updatedCapturedPhotos);
+      setCapturedMessage('Photo sauvegardée');
+      
+      
+      setSelectedPhoto({ imageDataURL, ...photoInfo });
+      
+    }
+    
+    );
+    stopCamera();
+    
+  };
   useEffect(() => {
     if (selectedPhoto) {
+      // Faites quelque chose avec la photo capturée, par exemple affichez-la
       console.log('Photo capturée :', selectedPhoto);
     }
-    setActiveContainer(null)
   }, [selectedPhoto]);
 
-  const toggleCameraAndCaptureCompteur =  () => {
-    if (!isCameraActive) {
-      // Démarrer la caméra s'il n'est pas encore actif
-       startCameraCompteur();
-       setActiveCompteurContainer('Compteur'); 
-       setActiveFaceAvantContainer(null); 
-       
-    } else {
-      capturePhoto('Compteur');
-      setActiveCompteurContainer(null); 
-      stopCamera();
-    }
-  };
-  const toggleCameraAndCaptureFaceAvant =  () => {
+  const toggleCameraAndCapture =  () => {
     if (!isCameraActive) {
       // Démarrer la caméra s'il n'est pas encore actif
        startCamera();
-       setActiveFaceAvantContainer('Face avant'); 
-       setActiveCompteurContainer(null); 
-       
+       setIsCameraActive(true);
     } else {
-      capturePhoto('Face avant');
-      setActiveFaceAvantContainer(null); 
-      stopCamera();
+      // Capturer une photo
+      capturePhoto('compteur');
     }
   };
   return (
@@ -169,7 +117,7 @@ const VideoContainerRefFaceAvant = useRef(null);
 
 
       
-      <div className={`image-container container ${activeCompteurContainer === 'Compteur' ? 'active' : ''}`}>
+      <div className="image-container container" ref={setVideoContainer}>
         <div className="image-wrapper">
           <div className="text-part">
             <h2>Compteur*</h2>
@@ -179,7 +127,7 @@ const VideoContainerRefFaceAvant = useRef(null);
             <img src='src\components\PhotosPage\Compteur.jpg' alt="Compteur" />
           </div>
         </div>
-        <button className="button-capture" onClick={ toggleCameraAndCaptureCompteur}>{isCameraActive ?'Capturer' : 'Démarrer la caméra'}</button>
+        <button className="button-capture" onClick={toggleCameraAndCapture}  >{isCameraActive ? 'Capturer' : 'Démarrer la caméra'}</button>
         {capturedMessage && <p>{capturedMessage}</p>}
 
         {selectedPhoto && (
@@ -194,28 +142,25 @@ const VideoContainerRefFaceAvant = useRef(null);
         {selectedPhoto && (
           <button className="button-view-photo" onClick={() => setSelectedPhoto(null)}>Fermer la photo</button>
         )}
-        {activeCompteurContainer === 'Compteur' && (
-            <div className="camera-container" ref={VideoContainerRefCompteur}>
-          <video ref={videoRefCompteur} autoPlay />
+            <div className="camera-container" ref={setVideoContainer}>
+          <video ref={videoRef} autoPlay />
       </div>
-      )}
       </div>
-      
 
 
-      <div className={`image-container container ${activeFaceAvantContainer === 'Face avant' ? 'active' : ''}`}>
+      <div className="image-container container" ref={setVideoContainer}>
         <div className="image-wrapper">
           <div className="text-part">
             <h2>Face avant*</h2>
-            <p>Veuillez prendre une photo claire de la face avant de votre voiture afin de documenter avec précision son état.</p>
+            <p>Veuillez prendre une photo claire de votre compteur afin de documenter avec précision les informations relatives  au kilométrage de votre véhicule.</p>
           </div>
           <div className="image-part">
-            <img src='src\components\PhotosPage\Face avant.png' alt="Face avant" />
+            <img src='src\components\PhotosPage\Face avant.png' alt="Compteur" />
           </div>
         </div>
-        <button className="button-capture" onClick={() => {toggleCameraAndCaptureFaceAvant(); setActiveFaceAvantContainer('Face avant'); }}>{isCameraActive ?'Capturer' : 'Démarrer la caméra'}</button>
-        {capturedMessage && <p>{capturedMessage}</p>}  
-            
+        <button className="button-capture" onClick={toggleCameraAndCapture}  >{isCameraActive ? 'Capturer' : 'Démarrer la caméra'}</button>
+        {capturedMessage && <p>{capturedMessage}</p>}
+
         {selectedPhoto && (
         <div className="captured-photo">
           <img src={selectedPhoto.imageDataURL} alt="Photo capturée" />
@@ -228,14 +173,14 @@ const VideoContainerRefFaceAvant = useRef(null);
         {selectedPhoto && (
           <button className="button-view-photo" onClick={() => setSelectedPhoto(null)}>Fermer la photo</button>
         )}
-             
-        {activeContainer === 'Face avant' && (
-            <div className="camera-container" ref={VideoContainerRef}>
+            <div className="camera-container" ref={setVideoContainer}>
           <video ref={videoRef} autoPlay />
       </div>
-      )}
-    
-        </div>
+      </div>
+
+
+
+
 
       <div className="image-container">
         <div className="image-wrapper">

@@ -1,36 +1,112 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
-import sanlamLogo from './SanlamLogo.png'; // Utilisez require pour importer l'image
-import axios from '../../axiosConfig';
+import sanlamLogo from './SanlamLogo.png'; 
+import { Link } from 'react-router-dom';
+
+
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [authenticated, setAuthenticated] = useState(false); 
+  
+ 
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value); 
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-  }; 
+  };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    console.log('handleLogin function is called');
+  
     try {
-      const response = await axios.post('https://localhost:7214/api/Admins/login', { email, password }); // Remplacez '/api/login' par l'URL de votre endpoint d'authentification
-
-      if (response.data.success) {
-        // Authentification réussie, redirigez l'administrateur vers son espace
-        window.location.href = '/adminDashBooard'; // Remplacez '/admin-space' par l'URL de l'espace administrateur
+      const response = await fetch(`https://localhost:7214/api/Admins/login?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+  
+        if (data.id) {
+          // Maintenant que vous avez l'ID de l'administrateur authentifié, effectuez une nouvelle requête pour obtenir les informations du nom et du prénom
+          const adminInfoResponse = await fetch(`https://localhost:7214/api/Admins/${data.id}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+  
+          if (adminInfoResponse.ok) {
+            const adminInfoData = await adminInfoResponse.json();
+  
+            // Vous avez maintenant les informations du nom et du prénom de l'administrateur authentifié
+            const { firstName, lastName } = adminInfoData;
+            console.log(`First Name: ${firstName}`);
+            console.log(`Last Name: ${lastName}`);
+  
+            // Utilisez ces informations pour naviguer vers AdminDashboard en utilisant Link
+            setAuthenticated(true);
+            
+            if ('Notification' in window && Notification.permission === 'granted') {
+              new Notification('Connexion réussie', {
+                body: `Vous êtes connecté en tant que ${email}`,
+              });
+            }
+          } else {
+            console.log(`Login failed for email: ${email}`);
+            setError('Identifiants incorrects. Veuillez réessayer.');
+            setAuthenticated(false);
+            if ('Notification' in window && Notification.permission === 'granted') {
+              new Notification('Échec de la connexion', {
+                body: 'Identifiants incorrects. Veuillez réessayer.',
+              });
+            }
+          }
+        } else {
+          console.log(`Login failed for email: ${email}`);
+          setError('Identifiants incorrects. Veuillez réessayer.');
+          setAuthenticated(false);
+          if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification('Échec de la connexion', {
+              body: 'Identifiants incorrects. Veuillez réessayer.',
+            });
+          }
+        }
       } else {
-        setError('Identifiants incorrects. Veuillez réessayer.');
+        console.log(`An error occurred during login for email: ${email}`);
+        setError('Une erreur s\'est produite lors de la connexion.');
+        setAuthenticated(false);
+        if ('Notification' in window && Notification.permission === 'granted') {
+          new Notification('Erreur de connexion', {
+            body: 'Une erreur s\'est produite lors de la connexion.',
+          });
+        }
       }
     } catch (error) {
       console.error(error);
+      console.log(`An error occurred during login for email: ${email}`);
       setError('Une erreur s\'est produite lors de la connexion.');
+      setAuthenticated(false);
+  
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('Erreur de connexion', {
+          body: 'Une erreur s\'est produite lors de la connexion.',
+        });
+      }
     }
   };
+  
+  
+
 
   return (
     <div className="admin-login-container">
@@ -58,9 +134,19 @@ const AdminLogin = () => {
             onChange={handlePasswordChange}
           />
         </div>
-        <button type="button" onClick={handleLogin}>
-          Connexion
-        </button>
+        {authenticated ? (
+          <Link to={`/adminDashboard?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`}>
+          <button type="button">Connexion</button>
+        </Link>
+        
+          //<Link to="/adminDashboard" state={{ firstName, lastName }} >
+           // <button type="button">Connexion</button>
+         // </Link>
+        ) : (
+          <button type="button" onClick={handleLogin}>
+            Connexion
+          </button>
+        )}
         {error && <p className="error-message">{error}</p>}
       </form>
     </div>

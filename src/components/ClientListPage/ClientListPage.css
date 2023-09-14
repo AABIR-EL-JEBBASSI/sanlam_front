@@ -1,0 +1,108 @@
+/* Styles communs */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: -60px;
+    margin-right: 50px;
+  }
+  
+  input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  button {
+    background-color: #ff5100;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  table.client-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table.client-table th,
+  table.client-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid white;
+  }
+  
+  table.client-table th {
+    background-color: #007bff;
+  }
+  
+  table.client-table tbody tr:nth-child(even) {
+    background-color: rgb(122, 134, 245);
+  }
+  
+  /* Styles spécifiques */
+  .client-list-container {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0px;
+    margin-right: 0px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu li {
+    margin-bottom: 32px; /*espacement menu items*/
+    cursor: pointer;
+    font-size: 21px;
+  }
+  
+  .menu li.active {
+    /*tableau de bord f menu*/
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  /* Styles pour la sidebar */
+  .sidebar {
+    width: 500px;
+    margin-top: -50px;
+    top: 0;
+    left: 0;
+    /* ... (autres styles du menu) */
+  }
+  
+  /* Styles pour le contenu */
+  .content {
+    width: 75%; /* Ajustez la largeur du contenu selon vos besoins */
+    padding: 20px;
+  }
+  
+  /* Styles pour le conteneur de la table des clients */
+  .client-table-container {
+    padding: 20px;
+    flex: 1;
+  }
+  
+  /* Styles pour les cellules de la table des clients */
+  .client-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #8e88df;
+  }
+  
+  /* Styles pour les en-têtes de la table des clients */
+  .client-table th {
+    background-color: #1dd479;
+  }
+  
+  /* Styles pour les lignes paires de la table des clients */
+  .client-table tbody tr:nth-child(even) {
+    background-color: #3a02a1;
+  }
+  

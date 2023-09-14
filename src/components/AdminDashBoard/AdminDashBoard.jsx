@@ -1,20 +1,28 @@
 import React from 'react';
 import './AdminDashboard.css';
-
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 const AdminDashboard = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const firstName = searchParams.get('firstName') || '';
+  const lastName = searchParams.get('lastName') || '';
+  console.log('First Name:', firstName);
+  console.log('Last Name:', lastName);
   return (
     <div className="admin-dashboard">
       {/* Sidebar */}
       <div className="sidebar">
         {/* Admin Info */}
         <div className="admin-info">
-          <h3>Nom Prénom de l'Administrateur</h3>
+        <h3>{`${firstName} ${lastName}`}</h3>
         </div>
         
         <ul className="menu">
           <li className="active">Tableau de bord</li>
-          <li>Clients</li>
-          <li>Demandes non traitées</li>
+          <li><Link to="/clientListPage">Clients</Link></li>
+          <li><Link to="/newDemands">Nouveaux demandes </Link></li>
+          
           <li>Demandes en cours</li>
           <li>Demandes traitées</li>
           <li>Tables et graphiques</li>
@@ -34,7 +42,7 @@ const AdminDashboard = () => {
           <div className="logo">
             <img src="src\components\AdminDashBoard\SanlamLogo.png" alt="Sanlam Logo" />
           </div>
-          <h2>Tableau de bord</h2>
+          
         </header>
         <div className="summary-container">
           <div className="summary-item">

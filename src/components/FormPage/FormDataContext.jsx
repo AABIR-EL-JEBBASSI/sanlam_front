@@ -1,27 +1,27 @@
 // src/FormDataContext.js
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useMemo } from 'react';
 
 const FormDataContext = createContext();
 
-export function FormDataProvider({ children }) {
+export function useFormData() {
+  return useContext(FormDataContext);
+}
+
+export const FormDataProvider = ({ children }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: '',
+    email: '', 
     phone: '',
-    address: '',
+    adress: '',
     carRegistration: '',
     carMake: '',
     carModel: '',
   });
-
+  const memoizedValue = useMemo(() => ({ formData, setFormData }), [formData, setFormData]);
   return (
-    <FormDataContext.Provider value={{ formData, setFormData }}>
+    <FormDataContext.Provider value={memoizedValue}>
       {children}
     </FormDataContext.Provider>
   );
-}
-
-export function useFormData() {
-  return useContext(FormDataContext);
 }
