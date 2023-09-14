@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl }) => {
+const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl , isActive }) => {
   const [capturedMessage, setCapturedMessage] = useState('');
   const [isCameraActive, setIsCameraActive] = useState(false);
   const videoContainer = useRef(null);
@@ -15,7 +15,6 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
       longitude: null,
     },
   });
-
 
   useEffect(() => {
     return () => {
@@ -41,7 +40,6 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
         console.error('Erreur lors de l\'accès à la caméra :', error);
       });
   };
-  
 
   const stopCamera = () => {
     if (videoRef.current) {
@@ -94,7 +92,7 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
       // Utilisez la fonction de rappel pour mettre à jour l'état dans le composant parent
       onPhotoCapture(imageName, { imageDataURL, ...photoInfo });
       setCapturedMessage('Photo sauvegardée');
-      setIsCameraActive(false);
+      // Ne désactivez pas la caméra ici pour permettre la capture de plusieurs photos
     });
   };
 
@@ -110,11 +108,15 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
 
   return (
     <div className="image-container container" ref={videoContainer}>
+    <div className="ti">
+    <div className="text-part">
       <h2>{containerName}*</h2>
       <p>{text}</p>
-      <div className="image-part">
-        <img src={imageUrl} alt={containerName} />
-      </div>
+    </div>
+    <div className="image-part">
+      <img src={imageUrl} alt={containerName} />
+  </div>
+  </div>
       {selectedPhoto.imageDataURL && (
         <div className="captured-photo">
           <img src={selectedPhoto.imageDataURL} alt="Photo capturée" />
@@ -135,3 +137,4 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
 };
 
 export default PhotoCapture;
+

@@ -23,24 +23,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 40px;
     background-color: #b5d2f1;
     overflow: hidden;
+    
+    
+    
+  }
+  
+  .ti {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Pour placer le texte et l'image à l'opposé l'un de l'autre */
+    margin: 50px; /* Espacement entre le texte et l'image */
+    margin-right: -50px;
+    
   }
   
   .image-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     margin-bottom: -5px;
     margin-left: 50px;
     margin-right: -100px;
+    
   }
+ 
   
   img {
     width: 50%;
     height: auto;
     margin-top: 50px;
+    
   }
   
 
@@ -79,7 +95,7 @@
     font-size: 18px;
     margin-bottom: 30px;
     margin-right: 100px;
-    margin-top: -10px ;
+    margin-top: 10px ;
     width: 210px;
     height: auto;
   }
@@ -95,7 +111,7 @@
   }
   
   .camera-container {
-    width: 100%;
+    width: 70%;
     height: auto;
   }
   
