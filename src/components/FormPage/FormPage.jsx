@@ -152,7 +152,7 @@ const FormPage = () => {
             />
           </div>
         </div>
-        <Link to="/photos">
+        <Link to="/photos2">
   <button type="button" disabled={!isFormComplete()}>
     Suivant
   </button>

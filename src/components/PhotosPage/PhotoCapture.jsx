@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { usePhotoContext } from './PhotoContext';
 
 const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl , isActive }) => {
   const [capturedMessage, setCapturedMessage] = useState('');
   const [isCameraActive, setIsCameraActive] = useState(false);
   const videoContainer = useRef(null);
   const videoRef = useRef(null);
+  const { addCapturedPhoto } = usePhotoContext(); 
 
   const streamRef = useRef(null);
   const [selectedPhoto, setSelectedPhoto] = useState({
@@ -70,31 +72,44 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString();
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      const photoInfo = {
-        date: formattedDate,
-        location: { latitude, longitude },
-      };
-      setSelectedPhoto({
-        imageDataURL,
-        date: formattedDate,
-        location: { latitude, longitude },
+    try {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const photoInfo = {
+          date: formattedDate,
+          location: { latitude, longitude },
+        };
+  
+        setSelectedPhoto({
+          imageDataURL,
+          date: formattedDate,
+          location: { latitude, longitude },
+        });
+  
+        // Call addCapturedPhoto from the context to save the photo data
+        addCapturedPhoto(imageName, {
+          imageDataURL,
+          date: formattedDate,
+          location: { latitude, longitude },
+        });
+  
+        // Log the saved photo data to the console
+        console.log('Saved photo data:', imageName, {
+          imageDataURL,
+          date: formattedDate,
+          location: { latitude, longitude },
+        });
+  
+        setCapturedMessage('Photo sauvegardée');
       });
-
-      onPhotoCapture(imageName, {
-        imageDataURL,
-        date: formattedDate,
-        location: { latitude, longitude },
-      });
-
-      // Utilisez la fonction de rappel pour mettre à jour l'état dans le composant parent
-      onPhotoCapture(imageName, { imageDataURL, ...photoInfo });
-      setCapturedMessage('Photo sauvegardée');
-      // Ne désactivez pas la caméra ici pour permettre la capture de plusieurs photos
-    });
+    } catch (error) {
+      console.error('Error getting geolocation:', error);
+    }
   };
+
+  
+  
 
   const toggleCameraAndCapture = () => {
     if (!isCameraActive) {
@@ -104,7 +119,9 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
       // Capturer une photo
       capturePhoto(containerName);
     }
+  
   };
+  
 
   return (
     <div className="image-container container" ref={videoContainer}>

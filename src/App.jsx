@@ -10,6 +10,7 @@ import RecapPage from './components/RecapPage/RecapPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import ClientListPage from './components/ClientListPage/ClientListPage';
 import AdminDashBoard from './components/AdminDashBoard/AdminDashBoard';
+import { PhotoProvider } from './components/PhotosPage/PhotoContext';
 
 import NewDemands from './components/NewDemands/NewDemands';
 import { FormDataProvider } from './components/FormPage/FormDataContext';
@@ -20,6 +21,7 @@ function App() {
   return (
     <Router>
       <FormDataProvider>
+      <PhotoProvider>
       <Routes> {/* Utilisez Routes pour définir vos itinéraires */}
         <Route path="/" element={<HomePage />} />
         <Route path="/form" element={<FormPage formData={formData} setFormData={setFormData} />} />
@@ -33,7 +35,9 @@ function App() {
 
         <Route path="/newDemands" element={<NewDemands formData={formData} />}/>
       </Routes>
+      </PhotoProvider>
       </FormDataProvider>
+
     </Router> 
   );
 }
