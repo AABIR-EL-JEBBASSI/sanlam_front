@@ -48,6 +48,7 @@
     margin-bottom: -5px;
     margin-left: 50px;
     margin-right: -100px;
+   
     
   }
  
@@ -115,6 +116,22 @@
     height: auto;
   }
   
+  .photo-container {
+    margin-bottom: 20px; /* Espacement entre les conteneurs */
+    border: 1px solid #ccc; /* Bordure autour de chaque conteneur */
+    padding: 20px; /* Espace à l'intérieur du conteneur */
+    background-color: #f9f9f9; /* Couleur de fond du conteneur */
+  }
   
+  /* Styles pour le texte à l'intérieur du conteneur */
+  .photo-container h2 {
+    font-size: 30px; /* Taille de police du titre */
+    margin-bottom: 10px; /* Espacement en bas du titre */
+  }
+  
+  .photo-container p {
+    font-size: 14px; /* Taille de police du texte */
+    color: #333; /* Couleur du texte */
+  }
   
 

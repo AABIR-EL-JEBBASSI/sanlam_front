@@ -13,6 +13,7 @@
     "axios": "^1.5.0",
     "chart.js": "^4.4.0",
     "html2pdf.js": "^0.10.1",
+    "is-base64": "^1.1.0",
     "jspdf": "^2.5.1",
     "node-notifier": "^10.0.1",
     "react": "^18.2.0",

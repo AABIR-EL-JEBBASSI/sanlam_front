@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import PhotoCapture from '../../components/PhotosPage/PhotoCapture';
 import { useFormData } from '../../components/FormPage/FormDataContext';
 import { usePhotoContext } from '../../components/PhotosPage/PhotoContext';
+import isValidBase64 from 'is-base64';
+import "./RecapPage.css";
 
 
 const RecapPage = () => {
@@ -20,26 +22,36 @@ const RecapPage = () => {
   const [setCapturedPhotos] = useState({});
   console.log('Captured Photos:', capturedPhotos);
   useEffect(() => {
-    // Retrieve the signature data from local storage
     const signatureData = localStorage.getItem('signatureData');
 
     if (signatureData) {
       const { signatureImageURL, name, date } = JSON.parse(signatureData);
-
-      // Update the RecapPage with the signature data
       signatureRef.current.src = signatureImageURL;
-
-      // Update the name and date in the formData object
       setSignatureInfo({ name, date });
     }
+
     const photosData = localStorage.getItem('capturedPhotosData');
     if (photosData) {
       const parsedPhotosData = JSON.parse(photosData);
+      // Update the state with the retrieved photos data
       setCapturedPhotos(parsedPhotosData);
       console.log('Parsed Photos Data:', parsedPhotosData);
     }
+  }, []); // Empty dependency array ensures this runs once on component mount
+
+  if (!formData) {
+    console.error('No formData found');
+    // You might want to handle this case gracefully, e.g., by rendering a loading indicator.
+    return null;
   }
-  );
+
+  console.log('Données du formulaire dans RecapPage:', formData);
+  console.log('URL de la signature:', formData.signature);
+  console.log('Captured Photos:', capturedPhotos);
+
+  // The rest of your component code...
+
+
   const handleSubmitCar = async () => {
     // Créez un objet pour représenter les données de la voiture
     const carData = {
@@ -89,84 +101,92 @@ const RecapPage = () => {
     }
   };
 
+  
+
   const handleSubmitPhotos = async () => {
     try {
-      // Recherchez le client correspondant en utilisant le nom et le prénom
-      const customerResponse = await fetch(`https://localhost:7214/api/Customers?lastName=${formData.lastName}&firstName=${formData.firstName}`);
-      
+      const customerResponse = await fetch(
+        `https://localhost:7214/api/Customers?lastName=${formData.lastName}&firstName=${formData.firstName}`
+      );
+  
       if (customerResponse.ok) {
         const customerData = await customerResponse.json();
-        
+  
         if (customerData.length > 0) {
-          // Si un client correspondant est trouvé, utilisez son ID pour créer une nouvelle voiture
-          const customerId = customerData[0].id; // Supposons que l'ID du client soit dans la réponse
-          
-          // Créez une nouvelle voiture en envoyant une requête POST au backend
+          const customerId = customerData[0].id;
           const carResponse = await fetch('https://localhost:7214/api/Cars', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ customerId }), // Utilisez le customerId pour créer la voiture
+            body: JSON.stringify({ customerId }),
           });
-          
+  
           if (carResponse.ok) {
-            // La voiture a été créée avec succès, vous pouvez gérer la réponse ici si nécessaire
             const carData = await carResponse.json();
-            const carId = carData.id; // Récupérez le carId généré automatiquement
-            
-            // Maintenant, vous avez le customerId et le carId, vous pouvez envoyer les photos
-            // Liste des noms des photos
+            const carId = carData.id;
+  
             const photoNames = [
               'Compteur',
               'Face avant',
               'face arriere',
               'face latérale conducteur',
-              'face_passager',
-              'cin_recto',
-              'cin_verso',
-              'permis_recto',
-              'permis_verso',
-              'carte_grise_recto',
-              'carte_grise_verso',
+              'face latérale passager',
+              'Cin recto',
+              'Cin verso',
+              'Permis recto',
+              'Permis verso',
+              'Carte grise recto',
+              'Carte grise verso',
             ];
-
-            // Parcourez la liste des noms de photos et envoyez chaque photo au backend
+  
             for (const photoName of photoNames) {
-              const photoData = capturedPhotos[photoName]; // Supposons que capturedPhotos contient les données de chaque photo
+              const photoData = capturedPhotos[photoName];
               if (!photoData) {
                 console.error(`No data found for photo: ${photoName}`);
-                continue; // Passez à la prochaine photo si aucune donnée n'est disponible
+                continue;
               }
+              
 
+              console.log(`Processing photo: ${photoName}`);
+
+              
+              if (!isValidBase64(photoData.imageData, { mimeRequired: true })) {
+                console.error(`Invalid base64 image data for photo: ${photoName}`);
+                continue;
+              }
+              console.log(`Sending photo ${photoName} to the backend...`);
+              const locationString = `${photoData.location.latitude},${photoData.location.longitude}`;
+  
               const photoToSend = {
                 carId,
                 customerId,
                 photoName,
-                date: photoData.date, // Date de la photo
-                location: photoData.location, // Emplacement de la photo
-                imageData: photoData.imageData, // Image en base64
+                date: photoData.date,
+                location: locationString, // Use the validated location string
+                imageData: photoData.imageData,
               };
-
-              // Effectuez une requête POST pour envoyer la photo au backend
+  
               const response = await fetch('https://localhost:7214/api/Photos', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(photoToSend), // Convertissez l'objet en JSON
+                body: JSON.stringify(photoToSend),
               });
-
+  
               if (response.ok) {
-                // La photo a été envoyée avec succès, vous pouvez gérer la réponse ici si nécessaire
                 console.log(`Photo ${photoName} successfully sent to the backend.`);
               } else {
-                // La requête a échoué, vous pouvez gérer les erreurs ici si nécessaire
                 console.error(`Failed to send photo ${photoName} to the backend.`);
+                const responseBody = await response.text();
+                console.error(`Response body: ${responseBody}`);
               }
             }
           } else {
             console.error('Failed to create a new car.');
+            const responseBody = await carResponse.text();
+            console.error(`Car response body: ${responseBody}`);
           }
         } else {
           console.error('No matching customer found.');
@@ -175,24 +195,20 @@ const RecapPage = () => {
         console.error('Failed to search for customer.');
       }
     } catch (error) {
-      // Une erreur s'est produite lors de la requête
       console.error('An error occurred while processing customer and car data:', error);
     }
   };
+  
+  
 
   const handleSubmitDemand = async () => {
     try {
-      // Recherchez le client correspondant en utilisant le nom et le prénom
+    
       const customerResponse = await fetch(`https://localhost:7214/api/Customers?lastName=${formData.lastName}&firstName=${formData.firstName}`);
-      
       if (customerResponse.ok) {
         const customerData = await customerResponse.json();
-        
         if (customerData.length > 0) {
-          // Si un client correspondant est trouvé, utilisez son ID pour créer une nouvelle demande
-          const customerId = customerData[0].id; // Supposons que l'ID du client soit dans la réponse
-          
-          // Créez une nouvelle demande en envoyant une requête POST au backend
+          const customerId = customerData[0].id;
           const demandResponse = await fetch('https://localhost:7214/api/Demands', {
             method: 'POST',
             headers: {
@@ -201,12 +217,10 @@ const RecapPage = () => {
             body: JSON.stringify({
               statut: 'Nouvelle demande',
               idClient: customerId,
-              signature: formData.signature, // Supposons que formData.signature contient la signature
+              signature: formData.signature, 
             }),
           });
-          
           if (demandResponse.ok) {
-            // La demande a été créée avec succès, vous pouvez gérer la réponse ici si nécessaire
             console.log('Demand data successfully sent to the backend.');
           } else {
             console.error('Failed to create a new demand.');
@@ -242,7 +256,7 @@ const RecapPage = () => {
     const confirmSend = window.confirm('Voulez-vous vraiment envoyer la demande?');
     console.log('Confirm Send:', confirmSend);
     if (confirmSend) {
-      debugger;
+      
       console.log('Before handleSendData');
       handleSendData();
       console.log('After handleSendData');
@@ -255,6 +269,7 @@ const RecapPage = () => {
          
   return (
     <div ref={pageRef}>
+      <div className="blue-container">
       <h2>Récapitulatif des données du formulaire :</h2>
       <p>Prénom : {formData.firstName}</p>
       <p>Nom : {formData.lastName}</p>
@@ -264,7 +279,8 @@ const RecapPage = () => {
       <p>Matricule de la voiture : {formData.carRegistration}</p>
       <p>Marque de la voiture : {formData.carMake}</p>
       <p>Modèle de la voiture : {formData.carModel}</p>
-
+      </div>
+      <div className="blue-container">
       <h2>Photos Capturées :</h2>
 {Object.keys(capturedPhotos).map((photoName) => (
   <div key={photoName}>
@@ -276,13 +292,14 @@ const RecapPage = () => {
     {/* You can add more information if needed */}
   </div>
 ))}
-
+</div>
+<div className="blue-container">
       <h2>Signature :</h2>
       <p>Nom et Prénom du signataire: {signatureInfo.name}</p>
       <p>Date de signature: {signatureInfo.date}</p>
       
       <img ref={signatureRef} alt="Signature" />
-      
+      </div>
 
       <div className="navigation-buttons">
         <Link to="/signature">

@@ -37,4 +37,15 @@
   button:hover {
     background-color: #0056b3;
   }
-  
+  /* Ajoutez ces styles dans votre fichier CSS ou balise <style> */
+
+.blue-container {
+  background-color: #cce6ff; /* Couleur de fond bleu clair */
+  padding: 50px; /* Espace intérieur */
+  margin-bottom: 20px; /* Espacement en bas de chaque section */
+  border-radius: 5px; /* Coins arrondis */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Ombre légère */
+  margin-top: 30px;
+}
+
+/* Ajoutez d'autres styles au besoin */

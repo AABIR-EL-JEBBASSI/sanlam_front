@@ -18,7 +18,7 @@ const PhotoPage2 = () => {
             <h2>Capture des photos !</h2>
             <p>* : Photos obligatoires</p>
             <p>² : Photos facultatives, mais ne seront validées qu'une fois prises en recto et verso</p>
-            
+            <div className="photo-container">
             <PhotoCapture
                 containerName="Compteur"
                 onPhotoCapture={handlePhotoCapture}
@@ -26,9 +26,9 @@ const PhotoPage2 = () => {
                 photoName="Compteur"
                 imageUrl="src/components/PhotosPage/Compteur.jpg"
                 
-                // Passer la fonction ici
             />
-            
+            </div>
+            <div className="photo-container">
             <PhotoCapture
                 containerName="Face avant"
                 text="Veuillez prendre une photo claire de la face avant de votre voiture afin de documenter avec précision son état."
@@ -37,6 +37,8 @@ const PhotoPage2 = () => {
                 onPhotoCapture={handlePhotoCapture}
                 // Passer la fonction ici
             />
+            </div>
+            <div className="photo-container">
              <PhotoCapture
                 containerName="Face arriere"
                 text="Veuillez prendre une photo claire de la face arrière de votre voiture afin de documenter avec précision son état."
@@ -45,7 +47,8 @@ const PhotoPage2 = () => {
                 onPhotoCapture={handlePhotoCapture}
                 // Passer la fonction ici
             />
-
+            </div>
+<div className="photo-container">
 <PhotoCapture
                 containerName="Face latérale conducteur"
                 text="Veuillez prendre une photo claire de la face latérale conducteur de votre voiture afin de documenter avec précision son état."
@@ -54,7 +57,8 @@ const PhotoPage2 = () => {
                 onPhotoCapture={handlePhotoCapture}
                 // Passer la fonction ici
             />
-
+            </div>
+<div className="photo-container">
 <PhotoCapture
                 containerName="Face latérale passager"
                 text="Veuillez prendre une photo claire de la face latérale passager de votre voiture afin de documenter avec précision son état."
@@ -63,55 +67,67 @@ const PhotoPage2 = () => {
                 onPhotoCapture={handlePhotoCapture}
                 // Passer la fonction ici
             />
-
+            </div>
+<div className="photo-container">
 <PhotoCapture
-                containerName="CIN²"
+                containerName="CIN recto²"
                 text="Veuillez prendre une photo claire et nette du recto de votre carte d'identité nationale (CIN)."
                 photoName="Cin recto"
                 imageUrl="src/components/PhotosPage/CIN recto2.jpg"
                 onPhotoCapture={handlePhotoCapture}
                 
             />
+            </div>
+            <div className="photo-container">
             <PhotoCapture
-                containerName="CIN²"
+                containerName="CIN verso²"
                 text="De plus, veuillez prendre une photo du verso de votre carte d'identité nationale (CIN) de manière lisible et sans reflets."
                 photoName="Cin verso"
                 imageUrl="src/components/PhotosPage/CIN verso.jpg"
                 onPhotoCapture={handlePhotoCapture}
                 
             /> 
+            </div>
+            <div className="photo-container">
               <PhotoCapture
-                containerName="Permis de conduire²"
+                containerName="Permis de conduire recto²"
                 text="Veuillez prendre une photo claire et nette du recto de votre permis de conduire."
                 photoName="Permis recto"
                 imageUrl="src/components/PhotosPage/Permis recto2.png"
                 onPhotoCapture={handlePhotoCapture}
                 
             /> 
+            </div>
+            <div className="photo-container">
                <PhotoCapture
-                containerName="Permis de conduire²"
+                containerName="Permis de conduire verso²"
                 text="De plus, veuillez prendre une photo du verso de votre permis de conduire de manière à ce que toutes les informations soient clairement visibles."
                 photoName="Permis verso"
                 imageUrl="src/components/PhotosPage/Permis verso.png"
                 onPhotoCapture={handlePhotoCapture}
                 
             /> 
+            </div>
+            <div className="photo-container">
                   <PhotoCapture
-                containerName="Carte grise²"
+                containerName="Carte grise recto²"
                 text="Veuillez capturer une image nette du recto de votre carte grise de manière à ce que toutes les informations soient clairement visibles."
                 photoName="Carte grise recto"
                 imageUrl="src/components/PhotosPage/Carte grise recto2.png"
                 onPhotoCapture={handlePhotoCapture}
                 
             /> 
+            </div>
+            <div className="photo-container">
                   <PhotoCapture
-                containerName="Carte grise²"
+                containerName="Carte grise verso²"
                 text="De plus, Veuillez capturer une image nette du verso de votre carte grise. de manière à ce que toutes les informations soient clairement visibles."
                 photoName="Carte grise verso"
                 imageUrl="src/components/PhotosPage/Carte grise verso.png"
                 onPhotoCapture={handlePhotoCapture}
                 
             /> 
+            </div>
 
             
 
