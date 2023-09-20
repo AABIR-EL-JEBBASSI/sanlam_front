@@ -2,23 +2,23 @@ import React, { useState, useEffect } from 'react';
 import '../../components/ClientListPage/ClientListPage.css';
 import { Link } from 'react-router-dom';
 
-const NewDemands = () => {
+const FinishedDemands = () => {
   const [searchText, setSearchText] = useState('');
-  const [clientsWithNewDemands, setClientsWithNewDemands] = useState([]);
+  const [clientsWithFinishedDemands, setClientsWithFinishedDemands] = useState([]);
 
   useEffect(() => {
-    // Utilisez une requête à votre API pour récupérer les clients avec de nouvelles demandes
+    // Utilisez une requête à votre API pour récupérer les clients avec des demandes terminées
     const fetchData = async () => {
       try {
-        const response = await fetch('https://localhost:7214/api/Demands/clients-with-new-demands');
+        const response = await fetch('https://localhost:7214/api/Demands/clients-with-finished-demands');
         if (!response.ok) {
           throw new Error('Erreur lors de la récupération des données.');
         }
         const data = await response.json();
-        console.log('Clients avec de nouvelles demandes récupérés depuis l\'API :', data);
-        setClientsWithNewDemands(data);
+        console.log('Clients avec des demandes terminées récupérés depuis l\'API :', data);
+        setClientsWithFinishedDemands(data);
       } catch (error) {
-        console.error('Erreur lors de la récupération des clients avec de nouvelles demandes depuis l\'API', error);
+        console.error('Erreur lors de la récupération des clients avec des demandes terminées depuis l\'API', error);
       }
     };
 
@@ -43,9 +43,10 @@ const NewDemands = () => {
           <li><Link to="/adminDashBoard">Tableau de bord</Link></li>
           
           <li><Link to="/clientListPage">Liste des clients</Link></li>
-          <li className="active">Demandes non traitées</li>
-          <li>< Link to ="/demandesEnCours">Demandes en cours</Link></li>
-          <li>< Link to ="/finishedDemands">Demandes traitées</Link></li>
+          <li><Link to="/newDemands">Demandes non traitées</Link></li>
+          
+          <li><Link to="/demandesEnCours">Demandes en cours</Link></li>
+          <li className="active">Demandes traitées</li>
           
           <li><Link to= "/login">Déconnexion</Link></li>
         </ul>
@@ -75,20 +76,20 @@ const NewDemands = () => {
               </tr>
             </thead>
             <tbody>
-              {clientsWithNewDemands.map((client) => (
-                <tr key={client.id}>
-                  <td>{client.lastName}</td>
-                  <td>{client.firstName}</td>
-                  <td>{client.address}</td>
-                  <td>{client.phoneNumber}</td>
-                  <td>{client.email}</td>
-                  <td>
-                    <Link to={`/demandPage/${client.id}`}>
-                      <button>Afficher</button>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
+            {clientsWithFinishedDemands.map((client) => (
+              <tr key={client.id}>
+                <td>{client.lastName}</td>
+                <td>{client.firstName}</td>
+                <td>{client.address}</td>
+                <td>{client.phoneNumber}</td>
+                <td>{client.email}</td>
+                <td>
+                  <Link to={`/demandPage/${client.id}`}>
+                    <button>Afficher</button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
             </tbody>
           </table>
         </div>
@@ -97,4 +98,4 @@ const NewDemands = () => {
   );
 };
 
-export default NewDemands;
+export default FinishedDemands;

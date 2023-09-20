@@ -1,0 +1,64 @@
+/* styles.css (ou un fichier CSS séparé) */
+
+/* Style général pour le conteneur de la page */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Style pour les titres */
+  h2 {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style pour les informations du client */
+  .client-info {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style pour les informations de la voiture */
+  .car-info {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style pour les photos */
+  .photos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .photos li {
+    margin-bottom: 20px;
+  }
+  
+  .photos img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* Style pour la signature */
+  .signature {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style pour le texte de la signature */
+  .signature p {
+    margin: 5px 0;
+  }
+  

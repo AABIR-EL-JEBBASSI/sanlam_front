@@ -4,6 +4,7 @@ import PhotoCapture from '../../components/PhotosPage/PhotoCapture';
 import { useFormData } from '../../components/FormPage/FormDataContext';
 import { usePhotoContext } from '../../components/PhotosPage/PhotoContext';
 
+
 const RecapPage = () => {
   const { capturedPhotos } = usePhotoContext();
   const signatureRef = useRef(null);
@@ -16,7 +17,7 @@ const RecapPage = () => {
     console.log('URL de la signature :', formData.signature);
   }
   const [signatureInfo, setSignatureInfo] = useState({ name: '', date: '' });
-  const [ setCapturedPhotos] = useState({});
+  const [setCapturedPhotos] = useState({});
   console.log('Captured Photos:', capturedPhotos);
   useEffect(() => {
     // Retrieve the signature data from local storage
@@ -117,10 +118,10 @@ const RecapPage = () => {
             // Maintenant, vous avez le customerId et le carId, vous pouvez envoyer les photos
             // Liste des noms des photos
             const photoNames = [
-              'compteur',
-              'face_avant',
-              'face_arriere',
-              'face_conducteur',
+              'Compteur',
+              'Face avant',
+              'face arriere',
+              'face latérale conducteur',
               'face_passager',
               'cin_recto',
               'cin_verso',
@@ -144,7 +145,7 @@ const RecapPage = () => {
                 photoName,
                 date: photoData.date, // Date de la photo
                 location: photoData.location, // Emplacement de la photo
-                imageData: photoData.imageDataURL, // Image en base64
+                imageData: photoData.imageData, // Image en base64
               };
 
               // Effectuez une requête POST pour envoyer la photo au backend
@@ -200,7 +201,7 @@ const RecapPage = () => {
             body: JSON.stringify({
               statut: 'Nouvelle demande',
               idClient: customerId,
-              recapitulatif: formData.signature, // Supposons que formData.signature contient la signature
+              signature: formData.signature, // Supposons que formData.signature contient la signature
             }),
           });
           
@@ -223,11 +224,34 @@ const RecapPage = () => {
   };
   
   const handleSendData = async () => {
-    await handleSubmitCar();
-    await handleSubmitPhotos();
-    await handleSubmitDemand();
+    try {
+      console.log('Calling handleSubmitCar');
+      await handleSubmitCar();
+      console.log('Calling handleSubmitPhotos');
+      await handleSubmitPhotos();
+      console.log('Calling handleSubmitDemand');
+      await handleSubmitDemand();
+    } catch (error) {
+      console.error('An error occurred in handleSendData:', error);
+    }
   };
+  
+  
+  const showNotification = () => {
+    console.log('Button clicked');
+    const confirmSend = window.confirm('Voulez-vous vraiment envoyer la demande?');
+    console.log('Confirm Send:', confirmSend);
+    if (confirmSend) {
+      debugger;
+      console.log('Before handleSendData');
+      handleSendData();
+      console.log('After handleSendData');
+     
+    } else {
+      // L'utilisateur a annulé l'envoi
+    }
     
+  };
          
   return (
     <div ref={pageRef}>
@@ -245,7 +269,7 @@ const RecapPage = () => {
 {Object.keys(capturedPhotos).map((photoName) => (
   <div key={photoName}>
     <h3>{photoName}</h3>
-    <img src={capturedPhotos[photoName].imageDataURL} alt={photoName} />
+    <img src={capturedPhotos[photoName].imageData} alt={photoName} />
     <p>Date: {capturedPhotos[photoName].date}</p>
     <p>Latitude: {capturedPhotos[photoName].location.latitude}</p>
     <p>Longitude: {capturedPhotos[photoName].location.longitude}</p>
@@ -264,7 +288,9 @@ const RecapPage = () => {
         <Link to="/signature">
           <button>Précédent</button>
         </Link>
-        <button onClick={handleSendData}>Envoyer</button>
+        
+        <button onClick={showNotification}>Envoyer</button>
+        
       </div>
     </div>
   );

@@ -10,7 +10,8 @@ const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [authenticated, setAuthenticated] = useState(false); 
-  
+  const [firstName, setFirstName] = useState(''); // Initialisez avec une valeur vide par défaut
+  const [lastName, setLastName] = useState('');
  
 
   const handleEmailChange = (e) => {

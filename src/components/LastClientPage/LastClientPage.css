@@ -1,0 +1,23 @@
+.last-client-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh; /* Hauteur de l'écran entier pour centrer verticalement */
+    background-color: #f0f0f0; /* Couleur de fond de la page */
+    width: 800px;
+  }
+  
+  .success-message {
+    font-size: 24px;
+    color: #0077cc; /* Couleur de texte bleue */
+    margin-bottom: 16px; /* Marge inférieure pour espacement */
+    text-align: center;
+  }
+  
+  .thank-you-message {
+    font-size: 18px;
+    color: #333; /* Couleur de texte sombre */
+    text-align: center;
+  }
+  

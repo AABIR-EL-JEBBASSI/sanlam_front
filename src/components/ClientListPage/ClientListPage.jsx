@@ -79,11 +79,11 @@ const ClientList = () => {
         <ul className="menu">
           <li><Link to="/adminDashBoard">Tableau de bord</Link></li>
           <li className="active">Clients</li>
-          <li>Demandes non traitées</li>
-          <li>Demandes en cours</li>
-          <li>Demandes traitées</li>
-          <li>Tables et graphiques</li>
-          <li>Déconnexion</li>
+          <li><Link to="/newDemands">Demandes non traitées</Link></li>
+          <li><Link to="/demandesEnCours">Demandes en cours</Link></li>
+          <li><Link to="/finishedDemands">Demandes traitées</Link></li>
+          
+          <li><Link to= "/login">Déconnexion</Link></li>
         </ul>
       </div>
 

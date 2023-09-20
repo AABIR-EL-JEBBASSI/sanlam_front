@@ -67,7 +67,7 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
     canvasElement.height = videoRef.current.videoHeight;
     context.drawImage(videoRef.current, 0, 0, canvasElement.width, canvasElement.height);
 
-    const imageDataURL = canvasElement.toDataURL('image/png');
+    const imageData = canvasElement.toDataURL('image/png');
 
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString();
@@ -82,21 +82,21 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
         };
   
         setSelectedPhoto({
-          imageDataURL,
+          imageData,
           date: formattedDate,
           location: { latitude, longitude },
         });
   
         // Call addCapturedPhoto from the context to save the photo data
         addCapturedPhoto(imageName, {
-          imageDataURL,
+          imageData,
           date: formattedDate,
           location: { latitude, longitude },
         });
   
         // Log the saved photo data to the console
         console.log('Saved photo data:', imageName, {
-          imageDataURL,
+          imageData,
           date: formattedDate,
           location: { latitude, longitude },
         });
@@ -134,9 +134,9 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
       <img src={imageUrl} alt={containerName} />
   </div>
   </div>
-      {selectedPhoto.imageDataURL && (
+      {selectedPhoto.imageData && (
         <div className="captured-photo">
-          <img src={selectedPhoto.imageDataURL} alt="Photo capturée" />
+          <img src={selectedPhoto.imageData} alt="Photo capturée" />
           <p>Date: {selectedPhoto.date}</p>
           <p>Latitude: {selectedPhoto.location.latitude}</p>
           <p>Longitude: {selectedPhoto.location.longitude}</p>

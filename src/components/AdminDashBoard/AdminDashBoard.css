@@ -1,71 +1,35 @@
-/* AdminDashboard.css */
-.admin-dashboard { /*phrase tableau de bord*/
-    display: flex;
-    color: red;
-    
-    }
-
 /* Sidebar Styles */
 .sidebar {
     background-color: #385ab8; /* Couleur bleue */
     width: 18%; /* 1/5 de la page */
     padding: 30px;
     color: white; /* Texte blanc */
-    margin-left:-0px;
-}
-
-.admin-info { /*conteneurs demandes*/
-    margin-bottom: 50px;
-  
-    border-radius: 15;
-    
-}
-
-.menu {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu li {
-    margin-bottom: 32px; /*espacement menu items*/
-    cursor: pointer;
-    font-size: 21px;
-}
-
-.menu li.active { /*tableau de bord f menu*/
-    font-weight: bold;
-    font-size: 20px;
+    position: fixed; /* La barre latérale reste fixe */
+    height: 100%; /* Hauteur à 100% de la fenêtre */
+    overflow-y: auto; /* Défilement vertical si le contenu dépasse la hauteur */
 }
 
 /* Content Styles */
 .content {
     flex: 1;
     padding: 20px;
-    position: relative; /* Position relative pour l'alignement du logo */
+    margin-left: 18%; /* Marge à gauche pour éviter la superposition avec la barre latérale */
+    overflow: hidden; /* Cacher tout débordement horizontal */
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 328px;
-    
+    margin-bottom: 20px; /* Réduire l'espacement en haut */
 }
 
 /* Barre de recherche en haut de la page */
 .search-bar {
     display: flex;
     align-items: center;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 20px;
-    margin-right: 600px;
     color: rgb(43, 206, 56);
-    
 }
-
 
 .search-bar input[type="text"] {
     margin-right: 20px;
@@ -74,53 +38,53 @@
 .logo img {
     width: 120px;
     height: auto;
-    position: absolute;
-    top: -45px; /* Espacement par rapport au haut de la page */
-    right: 20px; /* Espacement par rapport à la droite de la page */
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .summary-container {
     display: flex;
     justify-content: space-between;
-    margin-left: 30px;
 }
 
-.summary-item { /* conteneurs demandes*/
-    background-color: #385ab8; /* Couleur de fond grise */
+.summary-item {
+    background-color: #385ab8;
     padding: 30px;
     flex-basis: 24%;
     text-align: center;
-    margin-right: 10px; /* Espacement entre les conteneurs */
+    margin-right: 10px;
     border-radius: 15px;
-    
 }
 
 /* Couleurs différentes pour les conteneurs */
 .demandes-icon {
-    background-color: red; /* Couleur d'icône de demande, à personnaliser */
+    background-color: red;
 }
 
 .en-cours-icon {
-    background-color: green; /* Couleur d'icône de demande en cours, à personnaliser */
+    background-color: green;
 }
 
 .traites-icon {
-    background-color: blue; /* Couleur d'icône de demande traitée, à personnaliser */
+    background-color: blue;
 }
 
 .total-icon {
-    background-color: yellow; /* Couleur d'icône de total de demandes, à personnaliser */
+    background-color: yellow;
 }
 
 .summary-text p {
     margin: 0;
     font-weight: bold;
 }
-body{
+
+body {
     margin: 0;
+    font-family: Arial, sans-serif; /* Ajouter une police de caractères générique */
+    overflow-x: hidden; /* Cacher tout débordement horizontal */
 }
+
 /* Ajoutez des styles pour le conteneur de graphiques selon vos besoins */
 .chart-container {
     /* Styles des graphiques */
+    margin-top: 20px; /* Espacement par rapport aux résumés */
 }

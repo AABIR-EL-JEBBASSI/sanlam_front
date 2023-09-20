@@ -18,7 +18,7 @@ const PhotoPage2 = () => {
             <h2>Capture des photos !</h2>
             <p>* : Photos obligatoires</p>
             <p>² : Photos facultatives, mais ne seront validées qu'une fois prises en recto et verso</p>
-
+            
             <PhotoCapture
                 containerName="Compteur"
                 onPhotoCapture={handlePhotoCapture}
@@ -28,7 +28,7 @@ const PhotoPage2 = () => {
                 
                 // Passer la fonction ici
             />
-
+            
             <PhotoCapture
                 containerName="Face avant"
                 text="Veuillez prendre une photo claire de la face avant de votre voiture afin de documenter avec précision son état."

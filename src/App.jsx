@@ -10,10 +10,14 @@ import RecapPage from './components/RecapPage/RecapPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import ClientListPage from './components/ClientListPage/ClientListPage';
 import AdminDashBoard from './components/AdminDashBoard/AdminDashBoard';
+import LastClientPage from './components/LastClientPage/LastClientPage';
 import { PhotoProvider } from './components/PhotosPage/PhotoContext';
-
 import NewDemands from './components/NewDemands/NewDemands';
+import DemandesEnCours from './components/DemandesEnCours/DemandesEnCours';
+import FinishedDemands from './components/FinishedDemands/FinishedDemands';
 import { FormDataProvider } from './components/FormPage/FormDataContext';
+import DemandPage from './components/DemandPage/DemandPage';
+
 
 function App() {
   const [formData, setFormData] = useState({});
@@ -32,8 +36,13 @@ function App() {
         <Route path="/login" element={<LoginPage formData={formData} />}/>
         <Route path="/clientListPage" element={<ClientListPage formData={formData} />}/>
         <Route path="/adminDashBoard" element={<AdminDashBoard formData={formData} />}/>
-
+        <Route path="/lastClientPage" element={<LastClientPage formData={formData} />}/>
         <Route path="/newDemands" element={<NewDemands formData={formData} />}/>
+        <Route path="/demandesEnCours" element={<DemandesEnCours formData={formData} />}/>
+        <Route path="/finishedDemands" element={<FinishedDemands formData={formData} />}/>
+        <Route path="/demandPage/:clientId" element={<DemandPage formData={formData} />} />
+
+
       </Routes>
       </PhotoProvider>
       </FormDataProvider>

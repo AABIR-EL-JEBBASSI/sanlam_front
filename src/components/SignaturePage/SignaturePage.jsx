@@ -118,7 +118,7 @@ const SignaturePage = ({ formData, setFormData, setSignature }) => {
 )}
 
       <div className="navigation-buttons">
-        <Link to="/photos">
+        <Link to="/photos2">
           <button>Précédent</button>
         </Link>
         
