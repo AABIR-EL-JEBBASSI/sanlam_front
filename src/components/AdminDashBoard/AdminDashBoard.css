@@ -1,173 +1,164 @@
 /* Sidebar */
 
   
-  .admin-info h3 {
-    margin-bottom: 20px;
-    font-size: 18px;
-  }
-  
-  .menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    margin-top: 60px;
-  }
-  
-  .menu li {
-    padding: 10px 0;
-    font-size: 20px;
-    text-align: center;
-    margin-top: 10px;
-  }
-  .logo {
-    /* Styles du logo (à droite) */
-    flex: 1; /* Prendra une partie égale de l'espace disponible */
-    text-align: right; /* Alignez le contenu à droite */
-    padding: 20px; /* Espace intérieur */
-    margin-top: -80px;
-    height: 40px;
-  }
-  
-  
-  .menu li.active {
-    background-color: #007bff;
-  }
-  
-  .menu a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
-    padding: 10px 0;
-    transition: background-color 0.3s;
-  }
-  
-  .menu a:hover {
-    background-color: #4c17df;
-    color: #fff;
-  }
-  
-  /* Content */
+.admin-info h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
 
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 80px;
-  }
-  
-  .logo img {
-    max-width: 100px;
-  }
-  
-  .chart-container {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    height: 300px;
-  }
-  
-  .summary-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2px;
-    height: 220px;
-  }
-  
-  .summary-item {
-    flex: 1;
-    background-color: #cce6ff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  
-  .icon {
-    width: 50px;
-    height: 50px;
-    background-color: #007bff;
-    margin: 0 auto;
-    border-radius: 50%;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-  }
-  
-  .summary-text p:first-child {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .navigation-buttons {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 15px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 18px;
-    margin: 5px;
-    margin-top: 20px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  /* AdminDashboard.css */
-/* AdminDashboard.css */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 60px;
+}
 
+.menu li {
+  padding: 10px 0;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+.logo {
   
-  /* AdminDashboard.css */
+  flex: 1; /* Prendra une partie égale de l'espace disponible */
+  text-align: right; /* Alignez le contenu à droite */
+  padding: 20px; /* Espace intérieur */
+  margin-top: -80px;
+  height: 40px;
+}
 
-/* AdminDashboard.css */
-body, html {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    overflow: hidden;
-    padding: 0px;
-  }
-  
-  .admin-dashboard {
-    display: flex;
-    height: 100vh; /* Ajustez la hauteur pour occuper toute la hauteur de la fenêtre */
-    margin: 0; /* Supprimez la marge pour éviter les espaces inutiles */
-    padding: 0px;
-  }
-  
-  
-  /* Sidebar */
-  .sidebar {
-    flex: 0 0 300px; /* Largeur fixe du sidebar */
-    background-color: #03045e; /* Couleur de fond du sidebar */
-    color: white;
-    padding-top: 20px; /* Espace en haut du sidebar */
-    overflow-y: auto; /* Activer la barre de défilement si le contenu dépasse la hauteur */
-    margin-left: -260px;
-  }
-  
-  /* Ajustez la marge en bas du dernier lien */
-  .menu li:last-child {
-    margin-bottom: 20px;
-  }
-  
-  /* Content */
-  .content {
-    width: 830px;
-    flex: 1; /* Le contenu occupe tout l'espace restant */
-    padding: 0px; /* Espace intérieur du contenu */
-    background-color: #f5f5f5;
-    overflow-y: auto; /* Activer la barre de défilement si le contenu dépasse la hauteur */
-    margin-right: -270px;
-  }
-  
-  /* Ajustez la marge en bas du contenu si nécessaire */
-  
+
+.menu li.active {
+  background-color: rgb(5, 68, 136)
+}
+
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  padding: 10px 0;
+  transition: background-color 0.3s;
+}
+
+.menu a:hover {
+  background-color: #15024b;
+  color: #fff;
+}
+
+/* Content */
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.logo img {
+  max-width: 100px;
+}
+
+.chart-container {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  height: 300px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  display: flex;
+}
+
+.summary-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  height: 220px;
+}
+
+.summary-item {
+  flex: 1;
+  background-color: #cce6ff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  background-color: #007bff;
+  margin: 0 auto;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.summary-text p:first-child {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.navigation-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  margin: 5px;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+
+.admin-dashboard {
+  display: flex;
+  height: 100vh; /* Ajustez la hauteur pour occuper toute la hauteur de la fenêtre */
+  margin: 0; /* Supprimez la marge pour éviter les espaces inutiles */
+  padding: 0px;
+}
+
+
+/* Sidebar */
+.sidebar {
+  flex: 0 0 300px; /* Largeur fixe du sidebar */
+  background-color: #3a82b2; /* Couleur de fond du sidebar */
+  color: white;
+  padding-top: 20px; /* Espace en haut du sidebar */
+  overflow-y: auto; /* Activer la barre de défilement si le contenu dépasse la hauteur */
+  margin-left: -260px;
+}
+
+/* Ajustez la marge en bas du dernier lien */
+.menu li:last-child {
+  margin-bottom: 20px;
+}
+
+/* Content */
+.content {
+  width: 830px;
+  flex: 1; /* Le contenu occupe tout l'espace restant */
+  padding: 0px; /* Espace intérieur du contenu */
+  background-color: #f5f5f5;
+  overflow-y: auto; /* Activer la barre de défilement si le contenu dépasse la hauteur */
+  margin-right: -270px;
+}
+
+/* Ajustez la marge en bas du contenu si nécessaire */

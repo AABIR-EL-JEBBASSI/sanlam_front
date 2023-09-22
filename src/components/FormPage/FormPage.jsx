@@ -53,6 +53,7 @@ const FormPage = () => {
         
 
   return (
+ 
     <div className="form-page">
       <form className="form-container">
         <h2 className="phrase phrase">Nous serions ravis de recevoir vos demandes...</h2>
@@ -60,7 +61,7 @@ const FormPage = () => {
           <div className="form-group">
             <label htmlFor="firstName">Prénom</label>
             <input
-              type="text"
+              type="text1"
               id="firstName"
               name="firstName"
               className="form-input"
@@ -68,23 +69,25 @@ const FormPage = () => {
               onChange={handleInputChange}
             />
           </div>
+          
           <div className="form-group">
             <label htmlFor="lastName">Nom</label>
             <input
-              type="text"
+              type="text1"
               id="lastName"
               name="lastName"
               className="form-input"
               value={formData.lastName} 
               onChange={handleInputChange}
             />
+          
           </div>
         </div>
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
-              type="email"
+              type="text1"
               id="email"
               name="email"
               className="form-input"
@@ -92,23 +95,25 @@ const FormPage = () => {
               onChange={handleInputChange}
             />
           </div>
+         
           <div className="form-group">
             <label htmlFor="phone">Téléphone</label>
             <input
-              type="tel"
+              type="text1"
               id="phone"
               name="phone"
               className="form-input"
               value={formData.phone} 
               onChange={handleInputChange}
             />
+          
           </div>
         </div>
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="adress">Adresse</label>
             <input
-              type="text"
+              type="text1"
               id="adress"
               name="adress"
               className="form-input"
@@ -116,23 +121,25 @@ const FormPage = () => {
               onChange={handleInputChange}
             />
           </div>
+          
           <div className="form-group">
             <label htmlFor="carRegistration">Matricule de la voiture</label>
             <input
-              type="text"
+              type="text1"
               id="carRegistration"
               name="carRegistration"
               className="form-input"
               value={formData.carRegistration} 
               onChange={handleInputChange}
             />
+         
           </div>
         </div>
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="carMake">Marque de la voiture</label>
             <input
-              type="text"
+              type="text1"
               id="carMake"
               name="carMake"
               className="form-input"
@@ -140,16 +147,18 @@ const FormPage = () => {
               onChange={handleInputChange}
             />
           </div>
+         
           <div className="form-group">
             <label htmlFor="carModel">Modèle de la voiture</label>
             <input
-              type="text"
+              type="text1"
               id="carModel"
               name="carModel"
               className="form-input"
               value={formData.carModel} 
               onChange={handleInputChange}
             />
+         
           </div>
         </div>
         <Link to="/photos2">
@@ -159,14 +168,16 @@ const FormPage = () => {
 </Link>
 
 {showNotification && (
-  <div className="notification">
+  <div className="notification2">
     <p>Veuillez remplir tous les champs du formulaire.</p>
   </div>
 )}
 
       </form>
     </div>
+    
   );
+  
 };
 
 export default FormPage;

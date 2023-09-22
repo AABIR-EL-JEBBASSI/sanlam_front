@@ -25,11 +25,24 @@
     align-items: center;
     margin-top: 40px;
     background-color: #b5d2f1;
-    overflow: hidden;
     
+    width: 700px;
     
     
   }
+  .image-container::-webkit-scrollbar {
+    width: 12px; /* Largeur de la barre de défilement */
+  }
+  
+  .image-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Couleur de fond de la piste de défilement */
+  }
+  
+  .image::-webkit-scrollbar-thumb {
+    background-color: #888; /* Couleur de la poignée de la barre de défilement */
+    border-radius: 10px; /* Arrondi de la poignée de la barre de défilement */
+  }
+  
   
   .ti {
     display: flex;
@@ -113,8 +126,11 @@
   
   .camera-container {
     width: 70%;
-    height: auto;
+    height: 400px;
+    
   }
+
+  
   
   .photo-container {
     margin-bottom: 20px; /* Espacement entre les conteneurs */

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import '../../components/ClientListPage/ClientListPage.css';
+import './demandesEnCours.css';
 import { Link } from 'react-router-dom';
+
 
 const EnCoursDemands = () => {
   const [searchText, setSearchText] = useState('');
   const [clientsWithEnCoursDemands, setClientsWithEnCoursDemands] = useState([]);
+  const [filteredClientsWithEnCoursDemands, setFilteredClientsWithEnCoursDemands] = useState([]);
 
+  // Effect pour récupérer les clients avec des demandes en cours
   useEffect(() => {
-    // Utilisez une requête à votre API pour récupérer les clients avec des demandes en cours
     const fetchData = async () => {
       try {
         const response = await fetch('https://localhost:7214/api/Demands/clients-with-en-cours-demands');
@@ -23,21 +25,30 @@ const EnCoursDemands = () => {
     };
 
     fetchData();
-  }, []);
+  }, []); // Effect exécuté une seule fois
+
+  // Effect pour filtrer les clients en fonction du texte de recherche
+  useEffect(() => {
+    const searchTerm = searchText.trim().toLowerCase();
+    const filtered = clientsWithEnCoursDemands.filter((client) => {
+      const fullName = `${client.firstName} ${client.lastName}`.toLowerCase();
+      return fullName.includes(searchTerm) || client.email.toLowerCase().includes(searchTerm);
+    });
+
+    setFilteredClientsWithEnCoursDemands(filtered);
+  }, [searchText, clientsWithEnCoursDemands]);
 
   const handleSearch = () => {
-    // Vous pouvez mettre ici une logique de recherche si nécessaire
-    // Par exemple, déclencher une nouvelle requête à l'API
-    // avec le texte de recherche pour obtenir les résultats mis à jour
+    // Vous pouvez ajouter une logique de recherche supplémentaire ici si nécessaire
   };
+
+ 
   
   return (
     <div className="client-list-container">
       <div className="sidebar">
         {/* Admin Info */}
-        <div className="admin-info">
-          <h3>Nom Prénom</h3>
-        </div>
+       
 
         <ul className="menu">
           <li><Link to="/adminDashBoard">Tableau de bord</Link></li>
@@ -59,7 +70,8 @@ const EnCoursDemands = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <button onClick={handleSearch}>Rechercher</button>
+          <button className="search" onClick={handleSearch}>Rechercher</button>
+
         </div>
 
         <div className="client-table-container">
@@ -75,17 +87,17 @@ const EnCoursDemands = () => {
               </tr>
             </thead>
             <tbody>
-            {clientsWithEnCoursDemands.map((client) => (
+            {filteredClientsWithEnCoursDemands.map((client) => (
                 <tr key={client.id}>
                   <td>{client.lastName}</td>
                   <td>{client.firstName}</td>
-                  <td>{client.address}</td>
+                  <td>{client.adress}</td>
                   <td>{client.phoneNumber}</td>
                   <td>{client.email}</td>
                   
                   <td>
                     <Link to={`/demandPage/${client.id}`}>
-                      <button>Afficher</button>
+                      <button className="search">Afficher</button>
                     </Link>
                   </td>
                 </tr>

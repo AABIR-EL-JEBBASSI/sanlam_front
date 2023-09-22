@@ -72,9 +72,7 @@ const ClientList = () => {
     <div className="client-list-container">
       <div className="sidebar">
         {/* Admin Info */}
-        <div className="admin-info">
-          <h3>Nom Prénom</h3>
-        </div>
+        
 
         <ul className="menu">
           <li><Link to="/adminDashBoard">Tableau de bord</Link></li>
@@ -95,11 +93,12 @@ const ClientList = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <button onClick={handleSearch}>Rechercher</button>
+          <button className="search" onClick={handleSearch}>Rechercher</button>
         </div>
 
         <div className="client-table-container">
-          <table className="client-table">
+        <table className="client-table custom-table">
+
             <thead>
               <tr>
                 <th>Nom</th>
@@ -117,11 +116,11 @@ const ClientList = () => {
                 <tr key={client.id}>
                   <td>{client.lastName}</td>
                   <td>{client.firstName}</td>
-                  <td>{client.address}</td>
+                  <td>{client.adress}</td>
                   <td>{client.phoneNumber}</td>
                   <td>{client.email}</td>
                   <td>
-                    <button onClick={() => handleSendLink(client.id, client.email)}>Envoyer</button>
+                    <button className="search" onClick={() => handleSendLink(client.id, client.email)}>Envoyer</button>
                   </td>
                 </tr>
             );

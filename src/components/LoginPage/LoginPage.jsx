@@ -111,11 +111,11 @@ const AdminLogin = () => {
 
   return (
     <div className="admin-login-container">
-      <img src={sanlamLogo} alt="Sanlam Logo" className="sanlam-logo" />
-      <h2 className="auth-title">Authentification</h2>
+      <img src={sanlamLogo} alt="Sanlam Logo" className="sanlam-logo5" />
+      <h2 className="auth-title5">Authentification</h2>
 
       <form className="admin-login-form">
-        <div className="form-group">
+        <div className="form-group5">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -125,7 +125,7 @@ const AdminLogin = () => {
             onChange={handleEmailChange}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group5">
           <label htmlFor="password">Mot de passe</label>
           <input
             type="password"
@@ -137,14 +137,14 @@ const AdminLogin = () => {
         </div>
         {authenticated ? (
           <Link to={`/adminDashboard?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`}>
-          <button type="button">Connexion</button>
+          <button className='5' type="button">Connexion</button>
         </Link>
         
           //<Link to="/adminDashboard" state={{ firstName, lastName }} >
            // <button type="button">Connexion</button>
          // </Link>
         ) : (
-          <button type="button" onClick={handleLogin}>
+          <button className='5' type="button" onClick={handleLogin}>
             Connexion
           </button>
         )}

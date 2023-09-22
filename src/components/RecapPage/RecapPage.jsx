@@ -3,90 +3,93 @@ import { Link } from 'react-router-dom';
 import PhotoCapture from '../../components/PhotosPage/PhotoCapture';
 import { useFormData } from '../../components/FormPage/FormDataContext';
 import { usePhotoContext } from '../../components/PhotosPage/PhotoContext';
+import { useSignature } from '../../components/SignaturePage/SignatureContext';
 import isValidBase64 from 'is-base64';
-import "./RecapPage.css";
-
+import './RecapPage.css';
 
 const RecapPage = () => {
   const { capturedPhotos } = usePhotoContext();
-  const signatureRef = useRef(null);
-  const pageRef = useRef(null);
-  const { formData} = useFormData();
-  if (!formData) {
-    console.error('No formData found');
-  } else {
+  const { formData } = useFormData();
+  const { signatureData } = useSignature();
+
+  useEffect(() => {
+    if (!formData) {
+      console.error('No formData found');
+      // Vous pouvez gérer ce cas de manière appropriée, par exemple, en affichant un indicateur de chargement.
+      return;
+    }
+
     console.log('Données du formulaire dans RecapPage :', formData);
     console.log('URL de la signature :', formData.signature);
-  }
-  const [signatureInfo, setSignatureInfo] = useState({ name: '', date: '' });
-  const [setCapturedPhotos] = useState({});
-  console.log('Captured Photos:', capturedPhotos);
-  useEffect(() => {
-    const signatureData = localStorage.getItem('signatureData');
 
-    if (signatureData) {
-      const { signatureImageURL, name, date } = JSON.parse(signatureData);
-      signatureRef.current.src = signatureImageURL;
-      setSignatureInfo({ name, date });
+    const signatureDataFromLocalStorage = localStorage.getItem('signatureData');
+    if (signatureDataFromLocalStorage) {
+      const { signatureImageURL, name, date } = JSON.parse(signatureDataFromLocalStorage);
+      console.log('Données de la signature dans RecapPage :', signatureDataFromLocalStorage);
+      console.log('Signature Image URL dans RecapPage :', signatureImageURL);
+      setSignatureInfo({ name, date, signatureImageURL });
     }
 
-    const photosData = localStorage.getItem('capturedPhotosData');
-    if (photosData) {
-      const parsedPhotosData = JSON.parse(photosData);
-      // Update the state with the retrieved photos data
-      setCapturedPhotos(parsedPhotosData);
+    const photosDataFromLocalStorage = localStorage.getItem('capturedPhotosData');
+    if (photosDataFromLocalStorage) {
+      const parsedPhotosData = JSON.parse(photosDataFromLocalStorage);
       console.log('Parsed Photos Data:', parsedPhotosData);
+      setCapturedPhotos(parsedPhotosData);
     }
-  }, []); // Empty dependency array ensures this runs once on component mount
+  }, []);
 
-  if (!formData) {
-    console.error('No formData found');
-    // You might want to handle this case gracefully, e.g., by rendering a loading indicator.
-    return null;
-  }
+  const signatureRef = useRef(null);
+  const pageRef = useRef(null);
 
-  console.log('Données du formulaire dans RecapPage:', formData);
-  console.log('URL de la signature:', formData.signature);
-  console.log('Captured Photos:', capturedPhotos);
+  const [signatureInfo, setSignatureInfo] = useState({ name: '', date: '', signatureImageURL: '' });
+  const [setCapturedPhotos] = useState({});
 
-  // The rest of your component code...
+  // Le reste de votre code RecapPage...
+
+
 
 
   const handleSubmitCar = async () => {
     // Créez un objet pour représenter les données de la voiture
     const carData = {
-      brand: formData.carMake, // Utilisez les données du formulaire pour remplir ces champs
+      brand: formData.carMake,
       model: formData.carModel,
       numberPlate: formData.carRegistration,
     };
   
     try {
-      // Recherchez le client correspondant en utilisant le nom et le prénom
+      // Effectuez une recherche de client basée sur le nom et le prénom
       const customerResponse = await fetch(`https://localhost:7214/api/Customers?lastName=${formData.lastName}&firstName=${formData.firstName}`);
-      
+  
       if (customerResponse.ok) {
         const customerData = await customerResponse.json();
-        
-        if (customerData.length > 0) {
-          // Si un client correspondant est trouvé, utilisez son ID pour attribuer la voiture
-          const customerId = customerData[0].id; // Supposons que l'ID du client soit dans la réponse
-          carData.customerId = customerId;
-          
-          // Effectuez une requête POST vers votre backend pour créer la voiture
-          const carResponse = await fetch('https://localhost:7214/api/Cars', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(carData), // Convertissez l'objet en JSON
-          });
   
-          if (carResponse.ok) {
-            // La requête a réussi, vous pouvez gérer la réponse ici si nécessaire
-            console.log('Car data successfully sent to the backend.');
+        if (customerData.length > 0) {
+          // Trouvez le client correspondant aux critères
+          const matchingCustomer = customerData.find(customer => customer.lastName === formData.lastName && customer.firstName === formData.firstName);
+  
+          if (matchingCustomer) {
+            const customerId = matchingCustomer.id;
+            carData.customerId = customerId;
+  
+            // Ensuite, effectuez une requête POST vers votre backend pour créer la voiture
+            const carResponse = await fetch('https://localhost:7214/api/Cars', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(carData),
+            });
+  
+            if (carResponse.ok) {
+              // La requête a réussi, vous pouvez gérer la réponse ici si nécessaire
+              console.log('Car data successfully sent to the backend.');
+            } else {
+              // La requête a échoué, vous pouvez gérer les erreurs ici si nécessaire
+              console.error('Failed to send car data to the backend.');
+            }
           } else {
-            // La requête a échoué, vous pouvez gérer les erreurs ici si nécessaire
-            console.error('Failed to send car data to the backend.');
+            console.error('No matching customer found.');
           }
         } else {
           console.error('No matching customer found.');
@@ -105,6 +108,7 @@ const RecapPage = () => {
 
   const handleSubmitPhotos = async () => {
     try {
+      // Effectuez une recherche de client basée sur le nom et le prénom
       const customerResponse = await fetch(
         `https://localhost:7214/api/Customers?lastName=${formData.lastName}&firstName=${formData.firstName}`
       );
@@ -113,19 +117,17 @@ const RecapPage = () => {
         const customerData = await customerResponse.json();
   
         if (customerData.length > 0) {
-          const customerId = customerData[0].id;
-          const carResponse = await fetch('https://localhost:7214/api/Cars', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ customerId }),
-          });
+          // Trouvez le client correspondant aux critères
+          const matchingCustomer = customerData.find(
+            (customer) =>
+              customer.lastName === formData.lastName &&
+              customer.firstName === formData.firstName
+          );
   
-          if (carResponse.ok) {
-            const carData = await carResponse.json();
-            const carId = carData.id;
+          if (matchingCustomer) {
+            const customerId = matchingCustomer.id;
   
+            console.log('customerId:', customerId);
             const photoNames = [
               'Compteur',
               'Face avant',
@@ -146,24 +148,22 @@ const RecapPage = () => {
                 console.error(`No data found for photo: ${photoName}`);
                 continue;
               }
-              
-
+  
               console.log(`Processing photo: ${photoName}`);
-
-              
+  
               if (!isValidBase64(photoData.imageData, { mimeRequired: true })) {
                 console.error(`Invalid base64 image data for photo: ${photoName}`);
                 continue;
               }
+  
               console.log(`Sending photo ${photoName} to the backend...`);
               const locationString = `${photoData.location.latitude},${photoData.location.longitude}`;
   
               const photoToSend = {
-                carId,
-                customerId,
+                customerId, // Utilisez customerId obtenu à partir de la recherche du client
                 photoName,
                 date: photoData.date,
-                location: locationString, // Use the validated location string
+                location: locationString,
                 imageData: photoData.imageData,
               };
   
@@ -184,9 +184,7 @@ const RecapPage = () => {
               }
             }
           } else {
-            console.error('Failed to create a new car.');
-            const responseBody = await carResponse.text();
-            console.error(`Car response body: ${responseBody}`);
+            console.error('No matching customer found.');
           }
         } else {
           console.error('No matching customer found.');
@@ -195,20 +193,26 @@ const RecapPage = () => {
         console.error('Failed to search for customer.');
       }
     } catch (error) {
-      console.error('An error occurred while processing customer and car data:', error);
+      console.error('An error occurred while processing photos:', error);
     }
   };
-  
   
 
   const handleSubmitDemand = async () => {
     try {
-    
+      console.log('Recherche de client avec les noms suivants :', formData.lastName, formData.firstName);
       const customerResponse = await fetch(`https://localhost:7214/api/Customers?lastName=${formData.lastName}&firstName=${formData.firstName}`);
       if (customerResponse.ok) {
         const customerData = await customerResponse.json();
-        if (customerData.length > 0) {
-          const customerId = customerData[0].id;
+        const matchingCustomer = customerData.find((customer) => customer.phoneNumber === formData.phone);
+  
+        if (matchingCustomer) {
+          const customerId = matchingCustomer.id;
+  
+          // Utilisez la méthode setCustomerId du contexte pour enregistrer l'ID
+          //setCustomerId(customerId);
+  
+          // Ensuite, envoyez la demande en incluant customerId
           const demandResponse = await fetch('https://localhost:7214/api/Demands', {
             method: 'POST',
             headers: {
@@ -216,26 +220,28 @@ const RecapPage = () => {
             },
             body: JSON.stringify({
               statut: 'Nouvelle demande',
-              idClient: customerId,
-              signature: formData.signature, 
+              customerId: customerId,
+              
+              signature: signatureInfo.signatureImageURL,
             }),
           });
+  
           if (demandResponse.ok) {
-            console.log('Demand data successfully sent to the backend.');
+            console.log('Demand data successfully sent to the backend.',signatureInfo.signatureImageURL);
           } else {
             console.error('Failed to create a new demand.');
           }
         } else {
-          console.error('No matching customer found.');
+          console.error('Aucun client correspondant trouvé.');
         }
       } else {
-        console.error('Failed to search for customer.');
+        console.error('Échec de la recherche du client.');
       }
     } catch (error) {
-      // Une erreur s'est produite lors de la requête
-      console.error('An error occurred while processing demand data:', error);
+      console.error('Une erreur s\'est produite lors de la recherche du client :', error);
     }
   };
+  
   
   const handleSendData = async () => {
     try {
@@ -298,7 +304,8 @@ const RecapPage = () => {
       <p>Nom et Prénom du signataire: {signatureInfo.name}</p>
       <p>Date de signature: {signatureInfo.date}</p>
       
-      <img ref={signatureRef} alt="Signature" />
+      <img ref={signatureRef} src={signatureInfo.signatureImageURL} alt="Signature" />
+
       </div>
 
       <div className="navigation-buttons">

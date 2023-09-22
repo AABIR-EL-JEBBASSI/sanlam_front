@@ -6,22 +6,42 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
+.container {
+  width: 400px; /* Largeur du conteneur */
+  height: 400px; /* Hauteur du conteneur */
+  overflow: auto; /* Activer la barre de défilement si nécessaire */
+  
+}
+.scrollable-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 500px; /* Largeur du conteneur */
+  height: 100%; /* Hauteur du conteneur (peut être ajustée) */
+  overflow: auto; /* Activer la barre de défilement si nécessaire */
+}
+
 
 .form-container {
   background-color: white; /* Bleu clair */
   border-radius: 8px;
   padding: 60px;
-  max-width: 1500px;
-  width: 110%;
+  max-width: 1300px;
+  width: 1000px;
+  width: 115%;
   box-shadow: 0 0 10px rgba(134, 129, 204, 0.938);
   text-align: center;
+  
 }
+
 .phrase {
   color: #007bff;
   margin-top: 20px ;
   margin-bottom: 60px ;
 }
+
 
 
 
@@ -59,38 +79,45 @@ button[type="button"]:hover {
 .form-row {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   text-align: center;
-  color: #007bff;
+  color: #cad7e6;
   margin-right: 30px;
+  flex-basis: calc(50% - 15px);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
 }
 
-.form-input {
-  width: 80%;
-  padding: 5px;
-  border: 1px solid white; /* Couleur bleue pour la bordure */
+.form-input [type="text1"] {
+  width: 100%;
+  border: 1px solid white;
   border-radius: 15px;
   font-size: 16px;
   margin-top: 10px;
-  background-color: #dee2f7;
+  background-color: #7d88bd; /* Couleur de fond par défaut */
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
   color: black;
-
+  padding: 10px; /* Espacement intérieur */
 }
+
 
 
 /* Styliser les étiquettes des champs de formulaire */
 .form-group label {
   display: block;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   color: #007bff; /* Bleu foncé */
 }
 /* Appliquer un style à un champ de formulaire lorsqu'il est sélectionné (focus) */
@@ -100,4 +127,22 @@ button[type="button"]:hover {
   outline: none; /* Supprime le contour par défaut */
 }
 
+/* Styles personnalisés pour le conteneur de la barre de défilement */
+.my-custom-scrollbar {
+  max-height: 400px; /* Hauteur maximale de la zone de défilement */
+}
 
+/* Styles personnalisés pour la piste de la barre de défilement */
+.simplebar-track.vertical {
+  background: #f1f1f1; /* Couleur de fond de la piste de défilement (à personnaliser) */
+}
+
+/* Styles personnalisés pour la poignée de la barre de défilement */
+.simplebar-scrollbar {
+  background-color: #888; /* Couleur de la poignée de la barre de défilement (à personnaliser) */
+  border-radius: 10px; /* Arrondi de la poignée de la barre de défilement */
+}
+
+.phrase{
+font-size: 30px;
+}

@@ -1,7 +1,8 @@
-import React, { useRef, useState, useEffect  } from 'react';
+import React, { createContext, useRef, useState, useEffect } from 'react';
+import { useSignature } from './SignatureContext';
 import './SignaturePage.css';
 import { Link, useNavigate } from 'react-router-dom';
-
+const SignatureContext = createContext();
 const SignaturePage = ({ formData, setFormData, setSignature }) => {
   const signatureBoxRef = useRef(null);
   const [isSigning, setIsSigning] = useState(false);
@@ -12,6 +13,7 @@ const SignaturePage = ({ formData, setFormData, setSignature }) => {
   const navigate = useNavigate();
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const { signatureData, setSignatureData } = useSignature();
 
 
 
@@ -47,12 +49,12 @@ const SignaturePage = ({ formData, setFormData, setSignature }) => {
     setSignature(signatureImageURL);
     console.log('Signature sauvegardée:', signatureImageURL);
     localStorage.setItem('signatureData', JSON.stringify({ signatureImageURL, name, date }));
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      signature: signatureImageURL,
+    setSignatureData({
+      ...signatureData,
+      signatureImageURL,
       name,
       date,
-    }));
+    });
     setSignatureSaved(true); // Display the "Signature enregistrée" message
   };
   const showNotificationModal = () => {
@@ -63,14 +65,15 @@ const SignaturePage = ({ formData, setFormData, setSignature }) => {
 
   return (
     <div className="signature-page">
+      <div className="sig-container">
       <h2 className="signature-title">Signature numérique</h2>
       <p className="signature-description">
         Vous êtes sur le point d'apposer votre signature électronique sur ce document. Cette action possède une validité légale équivalente à celle d'une signature manuscrite sur papier.
       </p>
-
+      <div className="form-row">
       <div className="form-group">
         <label>Nom et Prénom du signataire</label>
-        <input type="text" 
+        <input type="text2" 
             value={name}
             onChange={(e) => setName(e.target.value)}
         />
@@ -78,10 +81,11 @@ const SignaturePage = ({ formData, setFormData, setSignature }) => {
 
       <div className="form-group">
         <label>Date de signature</label>
-        <input type="text"
+        <input type="text2"
          value={date}
          onChange={(e) => setDate(e.target.value)}
         />
+      </div>
       </div>
 
       <div className="signature-container">
@@ -144,6 +148,7 @@ const SignaturePage = ({ formData, setFormData, setSignature }) => {
 
 
 
+      </div>
       </div>
     </div>
   );

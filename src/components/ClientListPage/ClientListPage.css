@@ -1,108 +1,148 @@
 /* Styles communs */
 .search-bar {
-    display: flex;
-    align-items: center;
-    margin-top: -60px;
-    margin-right: 50px;
-  }
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 30px;
+  height: 40px;
+  width: 140px;
   
-  input[type="text"] {
-    flex: 1;
-    padding: 8px;
-    font-size: 16px;
-  }
   
-  button {
-    background-color: #ff5100;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-  }
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+  height: 25px;
+  width: 500px;
+  background-color: #dbd6f7;
+  border-radius: 15px;
   
-  table.client-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+}
+
+.search {
+  background-color: #14045a;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-bottom: 17px;
+}
+
+table.client-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #047591;
+}
+
+table.client-table th,
+table.client-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid white;
+}
+
+table.client-table th {
+  background-color: #2d85e2;
+}
+
+table.client-table tbody tr:nth-child(even) {
+  background-color: #69747c;
+}
+
+
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  margin-bottom: 32px; /*espacement menu items*/
+  cursor: pointer;
+  font-size: 21px;
+}
+
+.menu li.active {
+  /*tableau de bord f menu*/
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* Styles pour la sidebar */
+.sidebar {
+  width: 500px;
+  margin-top: -50px;
+  top: 0;
+  left: 0;
+  /* ... (autres styles du menu) */
+}
+
+/* Styles pour le contenu */
+.content {
+  width: 500px; /* Ajustez la largeur du contenu selon vos besoins */
+  padding: 20px;
+  margin-top: 0px;
+}
+
+/* Styles pour le conteneur de la table des clients */
+.client-table-container {
+  padding: 20px;
+  flex: 1;
   
-  table.client-table th,
-  table.client-table td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid white;
-  }
-  
-  table.client-table th {
-    background-color: #007bff;
-  }
-  
-  table.client-table tbody tr:nth-child(even) {
-    background-color: rgb(122, 134, 245);
-  }
-  
-  /* Styles spécifiques */
-  .client-list-container {
-    width: 1200px;
-    margin: 0 auto;
-    padding: 0px;
-    margin-right: 0px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .menu {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .menu li {
-    margin-bottom: 32px; /*espacement menu items*/
-    cursor: pointer;
-    font-size: 21px;
-  }
-  
-  .menu li.active {
-    /*tableau de bord f menu*/
-    font-weight: bold;
-    font-size: 20px;
-  }
-  
-  /* Styles pour la sidebar */
-  .sidebar {
-    width: 500px;
-    margin-top: -50px;
-    top: 0;
-    left: 0;
-    /* ... (autres styles du menu) */
-  }
-  
-  /* Styles pour le contenu */
-  .content {
-    width: 75%; /* Ajustez la largeur du contenu selon vos besoins */
-    padding: 20px;
-  }
-  
-  /* Styles pour le conteneur de la table des clients */
-  .client-table-container {
-    padding: 20px;
-    flex: 1;
-  }
-  
-  /* Styles pour les cellules de la table des clients */
-  .client-table td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #8e88df;
-  }
-  
-  /* Styles pour les en-têtes de la table des clients */
-  .client-table th {
-    background-color: #1dd479;
-  }
-  
-  /* Styles pour les lignes paires de la table des clients */
-  .client-table tbody tr:nth-child(even) {
-    background-color: #3a02a1;
-  }
-  
+}
+
+/* Styles pour les cellules de la table des clients */
+.client-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #271db1;
+}
+
+/* Styles pour les en-têtes de la table des clients */
+.client-table th {
+  background-color: #17ce72;
+}
+
+/* Styles pour les lignes paires de la table des clients */
+.client-table tbody tr:nth-child(even) {
+  background-color: #42296d;
+}
+.client-list-container {
+  display: flex;
+  height: 100vh; /* Ajustez la hauteur pour occuper toute la hauteur de la fenêtre */
+  margin: 0; /* Supprimez la marge pour éviter les espaces inutiles */
+  padding: 0px;
+}
+/* Styles pour la table des clients */
+.client-table {
+width: 100%;
+border-collapse: collapse;
+background-color: #00b4d8; /* Couleur de fond du tableau (bleu clair) */
+color: white; /* Couleur du texte (blanc) */
+}
+
+.client-table th,
+.client-table td {
+padding: 10px;
+text-align: center;
+border-bottom: 1px solid white; /* Bordure inférieure des cellules en blanc */
+}
+
+
+/* Styles pour la table des clients */
+.custom-table {
+width: 100%;
+border-collapse: collapse;
+background-color: #b9a2e2; /* Couleur de fond du tableau (bleu clair) */
+color: white; /* Couleur du texte (blanc) */
+}
+
+.custom-table th,
+.custom-table td {
+padding: 10px;
+text-align: center;
+border-bottom: 1px solid white; /* Bordure inférieure des cellules en blanc */
+}

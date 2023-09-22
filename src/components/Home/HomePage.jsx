@@ -24,7 +24,7 @@ const HomePage = () => {
           </div>
         </div>
       ) : (
-        <div className="content">
+        <div className="content1">
           {/* Contenu de la page après le chargement */}
         </div>
       )}

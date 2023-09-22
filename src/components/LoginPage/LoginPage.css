@@ -11,7 +11,7 @@
   height: 560px;
 }
 
-.sanlam-logo {
+.sanlam-logo5 {
   width: 150px; /* Ajustez la largeur de votre logo */
   margin-bottom: 20px;
 }
@@ -23,14 +23,14 @@
   margin-top: 20px;
 }
 
-.form-group {
+.form-group5 {
   margin-bottom: 15px;
 }
 
 label {
   display: block;
   font-weight: bold;
-  color: black; /* Couleur de l'écriture */
+  color: rgb(15, 12, 180); /* Couleur de l'écriture */
 }
 
 input[type="text"],
@@ -42,6 +42,7 @@ input[type="password"] {
   border-radius: 4px;
   font-size: 16px;
   color: black; /* Couleur de l'écriture */
+  background-color: rgb(206, 230, 222);
 }
 
 input[type="text"]:focus,
@@ -52,7 +53,7 @@ input[type="password"]:focus {
   box-shadow: 0 0 5px rgba(0, 0, 255, 0.3); /* Ombre en cas de focus */
 }
 
-button {
+button5 {
   width: 100%;
   padding: 10px;
   background-color: blue; /* Couleur de fond du bouton */

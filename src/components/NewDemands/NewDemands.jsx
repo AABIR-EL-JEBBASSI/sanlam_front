@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../components/ClientListPage/ClientListPage.css';
+import './newDemands.css';
 import { Link } from 'react-router-dom';
 
 const NewDemands = () => {
@@ -35,9 +35,7 @@ const NewDemands = () => {
     <div className="client-list-container">
       <div className="sidebar">
         {/* Admin Info */}
-        <div className="admin-info">
-          <h3>Nom Prénom</h3>
-        </div>
+       
 
         <ul className="menu">
           <li><Link to="/adminDashBoard">Tableau de bord</Link></li>
@@ -59,7 +57,7 @@ const NewDemands = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <button onClick={handleSearch}>Rechercher</button>
+          <button className="search" onClick={handleSearch}>Rechercher</button>
         </div>
 
         <div className="client-table-container">
@@ -79,12 +77,12 @@ const NewDemands = () => {
                 <tr key={client.id}>
                   <td>{client.lastName}</td>
                   <td>{client.firstName}</td>
-                  <td>{client.address}</td>
+                  <td>{client.adress}</td>
                   <td>{client.phoneNumber}</td>
                   <td>{client.email}</td>
                   <td>
                     <Link to={`/demandPage/${client.id}`}>
-                      <button>Afficher</button>
+                      <button className="search">Afficher</button>
                     </Link>
                   </td>
                 </tr>

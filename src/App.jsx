@@ -17,6 +17,7 @@ import DemandesEnCours from './components/DemandesEnCours/DemandesEnCours';
 import FinishedDemands from './components/FinishedDemands/FinishedDemands';
 import { FormDataProvider } from './components/FormPage/FormDataContext';
 import DemandPage from './components/DemandPage/DemandPage';
+import { SignatureProvider } from './components/SignaturePage/SignatureContext';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
     <Router>
       <FormDataProvider>
       <PhotoProvider>
+      <SignatureProvider> 
       <Routes> {/* Utilisez Routes pour définir vos itinéraires */}
         <Route path="/" element={<HomePage />} />
         <Route path="/form" element={<FormPage formData={formData} setFormData={setFormData} />} />
@@ -44,6 +46,7 @@ function App() {
 
 
       </Routes>
+      </SignatureProvider> 
       </PhotoProvider>
       </FormDataProvider>
 
