@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom'; // Importez useParams et Link
-import './DemandPage.css';
+import './DemandPage3.css';
 
-function DemandPage() {
+function DemandPage3() {
   const { clientId } = useParams(); // Utilisez le hook useParams pour obtenir le clientId
   const [clientData, setClientData] = useState({});
   const [carData, setCarData] = useState({});
@@ -120,14 +120,10 @@ return fetch(`https://localhost:7214/api/Demands?customerId=${clientId}`)
 
   return (
     <div className="demand-page">
-      <Link to="/newDemands" className="back-link">
+      <Link to="/finishedDemands" className="back-link">
         Retour
       </Link>
-      {demandStatut === 'Nouvelle demande' && (
-        <button className="start-button" onClick={updateDemandStatut}>
-          Commencer
-        </button>
-      )}
+    
       {loading ? (
         <p>Chargement en cours...</p>
       ) : (
@@ -173,4 +169,4 @@ return fetch(`https://localhost:7214/api/Demands?customerId=${clientId}`)
   );
 }
 
-export default DemandPage;
+export default DemandPage3;

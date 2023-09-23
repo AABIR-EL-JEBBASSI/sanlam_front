@@ -1,0 +1,78 @@
+/* Styles pour la page principale */
+.demand-page {
+    font-family: Arial, sans-serif;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    
+  }
+  
+  /* Style pour le bouton "Retour" */
+  .back-link {
+    display: inline-block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    background-color: #0074d9;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-link:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style pour le bouton "Commencer" */
+  .start-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .start-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Style pour les informations sur le client */
+  .client-info p {
+    margin: 5px 0;
+  }
+  
+  /* Style pour les informations sur la voiture */
+  .car-info p {
+    margin: 5px 0;
+  }
+  
+  /* Style pour la liste de photos */
+  .photos-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .photo-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .photo-item img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+  
+  /* Style pour les informations de signature */
+  .signature-info p {
+    margin: 5px 0;
+  }
+  

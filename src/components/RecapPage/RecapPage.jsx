@@ -6,11 +6,13 @@ import { usePhotoContext } from '../../components/PhotosPage/PhotoContext';
 import { useSignature } from '../../components/SignaturePage/SignatureContext';
 import isValidBase64 from 'is-base64';
 import './RecapPage.css';
+import { useNavigate } from 'react-router-dom'; 
 
 const RecapPage = () => {
   const { capturedPhotos } = usePhotoContext();
   const { formData } = useFormData();
   const { signatureData } = useSignature();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!formData) {
@@ -266,13 +268,14 @@ const RecapPage = () => {
       console.log('Before handleSendData');
       handleSendData();
       console.log('After handleSendData');
-     
+      navigate('/lastClientPage'); 
     } else {
       // L'utilisateur a annulé l'envoi
     }
     
   };
-         
+       
+  console.log('Rendering RecapPage');  
   return (
     <div ref={pageRef}>
       <div className="blue-container">
@@ -314,7 +317,7 @@ const RecapPage = () => {
         </Link>
         
         <button onClick={showNotification}>Envoyer</button>
-        
+       
       </div>
     </div>
   );

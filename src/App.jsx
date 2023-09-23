@@ -17,6 +17,8 @@ import DemandesEnCours from './components/DemandesEnCours/DemandesEnCours';
 import FinishedDemands from './components/FinishedDemands/FinishedDemands';
 import { FormDataProvider } from './components/FormPage/FormDataContext';
 import DemandPage from './components/DemandPage/DemandPage';
+import DemandPage3 from './components/DemandPage3/DemandPage3';
+import DemandPage2 from './components/DemandPage2/DemandPage2';
 import { SignatureProvider } from './components/SignaturePage/SignatureContext';
 
 
@@ -43,7 +45,8 @@ function App() {
         <Route path="/demandesEnCours" element={<DemandesEnCours formData={formData} />}/>
         <Route path="/finishedDemands" element={<FinishedDemands formData={formData} />}/>
         <Route path="/demandPage/:clientId" element={<DemandPage formData={formData} />} />
-
+        <Route path="/demandPage2/:clientId" element={<DemandPage2 formData={formData} />} />
+        <Route path="/demandPage3/:clientId" element={<DemandPage3 formData={formData} />} />
 
       </Routes>
       </SignatureProvider> 

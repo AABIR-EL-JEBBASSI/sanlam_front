@@ -96,7 +96,7 @@ const EnCoursDemands = () => {
                   <td>{client.email}</td>
                   
                   <td>
-                    <Link to={`/demandPage/${client.id}`}>
+                    <Link to={`/demandPage2/${client.id}`}>
                       <button className="search">Afficher</button>
                     </Link>
                   </td>
