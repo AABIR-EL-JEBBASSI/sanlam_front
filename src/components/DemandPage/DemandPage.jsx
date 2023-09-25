@@ -116,7 +116,8 @@ return fetch(`https://localhost:7214/api/Demands?customerId=${clientId}`)
       console.error('Erreur lors de la mise à jour du statut de la demande :', error);
     }
   };
-  
+ 
+
 
   return (
     <div className="demand-page">
@@ -128,6 +129,8 @@ return fetch(`https://localhost:7214/api/Demands?customerId=${clientId}`)
           Commencer
         </button>
       )}
+     
+
       {loading ? (
         <p>Chargement en cours...</p>
       ) : (

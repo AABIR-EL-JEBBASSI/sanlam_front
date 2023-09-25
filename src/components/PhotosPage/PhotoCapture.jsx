@@ -127,7 +127,7 @@ const PhotoCapture = ({ containerName, onPhotoCapture, text, photoName, imageUrl
     <div className="image-container container" ref={videoContainer}>
     <div className="ti">
     <div className="text-part">
-      <h2>{containerName}</h2>
+      <h2>{containerName}*</h2>
       <p>{text}</p>
     </div>
     <div className="image-part">

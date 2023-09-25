@@ -146,6 +146,7 @@ const RecapPage = () => {
   
             for (const photoName of photoNames) {
               const photoData = capturedPhotos[photoName];
+              console.log('photoData',photoData);
               if (!photoData) {
                 console.error(`No data found for photo: ${photoName}`);
                 continue;

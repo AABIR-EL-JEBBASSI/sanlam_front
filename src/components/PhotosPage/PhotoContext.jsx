@@ -14,7 +14,9 @@ export const PhotoProvider = ({ children }) => {
     setCapturedPhotos((prevPhotos) => ({
       ...prevPhotos,
       [photoName]: photoData,
+      
     }));
+    console.log('photoData33',photoData);
   };
 
   return (
